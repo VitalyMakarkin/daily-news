@@ -4,9 +4,21 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class ArticlesPage(
+    @SerialName("status")
+    val status: String,
+
+    @SerialName("totalResults")
+    val totalResults: Int,
+
+    @SerialName("articles")
+    val articles: List<Article>
+)
+
+@Serializable
 data class Source(
     @SerialName("id")
-    val id: String,
+    val id: String?,
 
     @SerialName("name")
     val name: String
@@ -14,8 +26,11 @@ data class Source(
 
 @Serializable
 data class Article(
+    @SerialName("source")
+    val source: Source,
+
     @SerialName("author")
-    val author: String,
+    val author: String?,
 
     @SerialName("title")
     val title: String,
