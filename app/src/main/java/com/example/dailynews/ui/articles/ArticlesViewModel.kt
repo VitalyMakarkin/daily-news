@@ -7,13 +7,16 @@ import com.example.dailynews.BuildConfig
 import com.example.dailynews.data.NewsApi
 import com.example.dailynews.model.Article
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import retrofit2.Retrofit
+import javax.inject.Inject
 
-class ArticlesViewModel : ViewModel() {
+@HiltViewModel
+class ArticlesViewModel @Inject constructor() : ViewModel() {
     private var _articles: MutableLiveData<List<Article>> = MutableLiveData()
     val articles get() = _articles
 

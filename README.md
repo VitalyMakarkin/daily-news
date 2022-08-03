@@ -6,17 +6,18 @@ Demonstrate development skills:
 
 - using Clean Architecture and Dependency Injection design pattern
 - using app navigation with Single Activity architecture
-- using network with REST architecture (with cache)
+- using network with cache
 - using device database
 
 ## Requirements
 
 Use tools:
 
-- [Dagger] - dependency injection
+- [Hilt] - dependency injection
 - [Retrofit] - network
 - [Room] - device database
 - [Cicerone] - navigation
+- [Timber] - logging
 
 Use web api:
 
@@ -60,12 +61,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-[Dagger]: <https://dagger.dev/>
+[Hilt]: <https://dagger.dev/hilt/>
 
 [Retrofit]: <https://github.com/square/retrofit>
 
 [Room]: <https://developer.android.com/jetpack/androidx/releases/room>
 
 [Cicerone]: <https://github.com/terrakok/Cicerone>
+
+[Timber]: <https://github.com/JakeWharton/timber>
 
 [News API]: <https://newsapi.org/>

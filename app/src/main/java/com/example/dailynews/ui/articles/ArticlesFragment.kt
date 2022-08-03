@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.dailynews.databinding.FragmentArticlesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ArticlesFragment : Fragment() {
 
     private val viewModel: ArticlesViewModel by viewModels()
@@ -26,7 +28,7 @@ class ArticlesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.articles.observe(viewLifecycleOwner) {
-            binding.result.text = it.toString()
+//            binding.result.text = it.toString()
         }
     }
 }
