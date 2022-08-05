@@ -15,7 +15,6 @@ class AppModule {
     @Singleton
     fun provideJson(): Json {
         return Json {
-            this.coerceInputValues = true
             this.ignoreUnknownKeys = true
             this.isLenient = false
         }
