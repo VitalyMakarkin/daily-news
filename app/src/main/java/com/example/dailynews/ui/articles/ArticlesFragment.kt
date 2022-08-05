@@ -28,7 +28,7 @@ class ArticlesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.articles.observe(viewLifecycleOwner) {
-//            binding.result.text = it.toString()
+            binding.articlesTv.text = it.toString()
         }
     }
 }
