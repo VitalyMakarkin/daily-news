@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dailynews.databinding.FragmentArticlesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +16,7 @@ class ArticlesFragment : Fragment() {
     private val viewModel: ArticlesViewModel by viewModels()
 
     private lateinit var binding: FragmentArticlesBinding
+    private val articlesAdapter: ArticlesAdapter by lazy { ArticlesAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +29,14 @@ class ArticlesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.articles.observe(viewLifecycleOwner) {
-            binding.articlesTv.text = it.toString()
+        viewModel.articles.observe(viewLifecycleOwner) { articles ->
+            articlesAdapter.submitList(articles)
+        }
+
+        binding.articlesRv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = articlesAdapter
+            setHasFixedSize(true)
         }
     }
 }
