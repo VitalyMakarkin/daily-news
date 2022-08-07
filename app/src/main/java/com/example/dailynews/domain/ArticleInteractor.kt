@@ -9,6 +9,7 @@ class ArticleInteractor @Inject constructor(
     private val newsApi: NewsApi
 ) {
     suspend fun getTopHeadlinesArticles(country: String, apiKey: String): Response<ArticlesPage> {
+        // TODO("Get articles from server, save (if not exist) in database and output on view")
         return newsApi.getTopHeadlinesArticles(country, apiKey)
     }
 }

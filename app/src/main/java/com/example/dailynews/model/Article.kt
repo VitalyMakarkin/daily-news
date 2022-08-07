@@ -38,12 +38,15 @@ data class Article(
     @SerialName("description")
     val description: String?,
 
+    // TODO("Convert field type from String to Uri")
     @SerialName("url")
     val url: String?,
 
+    // TODO("Convert field type from String to Uri")
     @SerialName("urlToImage")
     val urlToImage: String?,
 
+    // TODO("Convert field type from String to Date")
     @SerialName("publishedAt")
     val publishedAt: String?,
 

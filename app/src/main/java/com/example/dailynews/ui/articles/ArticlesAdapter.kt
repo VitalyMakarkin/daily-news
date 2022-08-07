@@ -16,6 +16,7 @@ class ArticlesAdapter :
         fun bind(article: Article) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
+            // TODO("Implement and bind onItemClick to display article by using navigation")
         }
     }
 

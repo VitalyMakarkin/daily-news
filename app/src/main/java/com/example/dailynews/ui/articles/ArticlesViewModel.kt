@@ -1,5 +1,6 @@
 package com.example.dailynews.ui.articles
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,12 +17,14 @@ class ArticlesViewModel @Inject constructor(
 ) :
     ViewModel() {
     private var _articles: MutableLiveData<List<Article>> = MutableLiveData()
-    val articles get() = _articles
+    val articles: LiveData<List<Article>> get() = _articles
 
+    // TODO("Pass BuildConfig through Application")
     private val apiKey = BuildConfig.NEWSAPI_KEY
 
     init {
         viewModelScope.launch {
+            // TODO("Optimize interactor")
             _articles.value = articleInteractor
                 .getTopHeadlinesArticles("ru", apiKey)
                 .body()!!

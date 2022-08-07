@@ -14,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ArticlesFragment : Fragment() {
 
     private val viewModel: ArticlesViewModel by viewModels()
-
     private lateinit var binding: FragmentArticlesBinding
     private val articlesAdapter: ArticlesAdapter by lazy { ArticlesAdapter() }
 
