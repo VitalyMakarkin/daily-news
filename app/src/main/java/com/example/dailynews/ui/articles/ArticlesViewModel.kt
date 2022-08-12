@@ -19,14 +19,11 @@ class ArticlesViewModel @Inject constructor(
     private var _articles: MutableLiveData<List<Article>> = MutableLiveData()
     val articles: LiveData<List<Article>> get() = _articles
 
-    // TODO("Pass BuildConfig through Application")
-    private val apiKey = BuildConfig.NEWSAPI_KEY
-
     init {
         viewModelScope.launch {
             // TODO("Optimize interactor")
             _articles.value = articleInteractor
-                .getTopHeadlinesArticles("ru", apiKey)
+                .getTopHeadlinesArticles("ru")
                 .body()!!
                 .articles
         }
