@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dailynews.BuildConfig
 import com.example.dailynews.domain.ArticleInteractor
 import com.example.dailynews.model.Article
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,11 +20,13 @@ class ArticlesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            // TODO("Optimize interactor")
-            _articles.value = articleInteractor
-                .getTopHeadlinesArticles("ru")
-                .body()!!
-                .articles
+            articleInteractor.getTopHeadlinesArticles("ru")
+                .onSuccess {
+                    _articles.value = it.articles
+                }
+                .onFailure {
+                    TODO("Implement")
+                }
         }
     }
 }

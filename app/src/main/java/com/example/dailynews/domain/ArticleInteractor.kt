@@ -1,5 +1,6 @@
 package com.example.dailynews.domain
 
+import com.example.dailynews.data.ArticleRepository
 import com.example.dailynews.data.NewsApi
 import com.example.dailynews.model.ArticlesPage
 import retrofit2.Response
@@ -7,10 +8,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ArticleInteractor @Inject constructor(
-    private val newsApi: NewsApi
+    private val articleRepository: ArticleRepository
 ) {
-    suspend fun getTopHeadlinesArticles(country: String): Response<ArticlesPage> {
-        // TODO("Get articles from server, save (if not exist) in database and output on view")
-        return newsApi.getTopHeadlinesArticles(country)
+    suspend fun getTopHeadlinesArticles(country: String): Result<ArticlesPage> {
+        return articleRepository.getTopHeadlinesArticles(country)
     }
 }
