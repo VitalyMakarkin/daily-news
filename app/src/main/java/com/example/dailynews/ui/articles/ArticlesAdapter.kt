@@ -13,6 +13,12 @@ class ArticlesAdapter :
     class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            itemView.setOnClickListener {
+                //
+            }
+        }
+
         fun bind(article: Article) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
