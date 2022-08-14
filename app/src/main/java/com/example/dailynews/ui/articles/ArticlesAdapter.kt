@@ -6,23 +6,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailynews.databinding.ItemArticleBinding
-import com.example.dailynews.model.network.ArticleResponse
+import com.example.dailynews.model.database.ArticleModel
 
 class ArticlesAdapter :
-    ListAdapter<ArticleResponse, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
+    ListAdapter<ArticleModel, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
     class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
             itemView.setOnClickListener {
-                //
+                // TODO("Implement and bind onItemClick to display article by using navigation")
             }
         }
 
-        fun bind(article: ArticleResponse) {
+        fun bind(article: ArticleModel) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
-            // TODO("Implement and bind onItemClick to display article by using navigation")
         }
     }
 
@@ -35,16 +34,14 @@ class ArticlesAdapter :
         holder.bind(getItem(position))
     }
 
-    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleResponse>() {
-        override fun areItemsTheSame(oldItem: ArticleResponse, newItem: ArticleResponse): Boolean {
-            return oldItem.title == newItem.title &&
-                    oldItem.author == newItem.author &&
-                    oldItem.publishedAt == newItem.publishedAt
+    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleModel>() {
+        override fun areItemsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: ArticleResponse,
-            newItem: ArticleResponse
+            oldItem: ArticleModel,
+            newItem: ArticleModel
         ): Boolean {
             return oldItem == newItem
         }

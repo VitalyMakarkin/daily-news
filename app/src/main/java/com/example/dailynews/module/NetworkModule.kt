@@ -31,7 +31,7 @@ class NetworkModule {
                 it.proceed(requestWithAuth)
             }
             .addInterceptor {
-                Timber.d(it.request().url().toString())
+                Timber.d("Network request to ${it.request().url()}")
                 it.proceed(it.request())
             }
             .build()

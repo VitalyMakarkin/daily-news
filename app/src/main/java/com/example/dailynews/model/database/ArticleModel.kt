@@ -5,9 +5,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "articles_table")
 data class ArticleModel(
-    @ColumnInfo(name = "source")
     @Embedded
     val source: SourceModel,
 
@@ -33,13 +32,13 @@ data class ArticleModel(
     val content: String,
 ) {
     data class SourceModel(
-        @ColumnInfo(name = "id")
+        @ColumnInfo(name = "source_id")
         val id: String,
 
-        @ColumnInfo(name = "name")
+        @ColumnInfo(name = "source_name")
         val name: String
     )
 
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    var id: Int = 0
 }
