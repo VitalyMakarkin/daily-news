@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailynews.databinding.ItemArticleBinding
-import com.example.dailynews.model.Article
+import com.example.dailynews.model.network.ArticleResponse
 
 class ArticlesAdapter :
-    ListAdapter<Article, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
+    ListAdapter<ArticleResponse, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
     class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -19,7 +19,7 @@ class ArticlesAdapter :
             }
         }
 
-        fun bind(article: Article) {
+        fun bind(article: ArticleResponse) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
             // TODO("Implement and bind onItemClick to display article by using navigation")
@@ -35,14 +35,17 @@ class ArticlesAdapter :
         holder.bind(getItem(position))
     }
 
-    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<Article>() {
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleResponse>() {
+        override fun areItemsTheSame(oldItem: ArticleResponse, newItem: ArticleResponse): Boolean {
             return oldItem.title == newItem.title &&
                     oldItem.author == newItem.author &&
                     oldItem.publishedAt == newItem.publishedAt
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areContentsTheSame(
+            oldItem: ArticleResponse,
+            newItem: ArticleResponse
+        ): Boolean {
             return oldItem == newItem
         }
 
