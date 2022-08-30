@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailynews.databinding.ItemArticleBinding
-import com.example.dailynews.model.database.ArticleModel
+import com.example.dailynews.model.database.ArticleDB
 
 class ArticlesAdapter :
-    ListAdapter<ArticleModel, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
+    ListAdapter<ArticleDB, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
     class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -19,7 +19,7 @@ class ArticlesAdapter :
             }
         }
 
-        fun bind(article: ArticleModel) {
+        fun bind(article: ArticleDB) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
         }
@@ -34,14 +34,14 @@ class ArticlesAdapter :
         holder.bind(getItem(position))
     }
 
-    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleModel>() {
-        override fun areItemsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
+    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleDB>() {
+        override fun areItemsTheSame(oldItem: ArticleDB, newItem: ArticleDB): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: ArticleModel,
-            newItem: ArticleModel
+            oldItem: ArticleDB,
+            newItem: ArticleDB
         ): Boolean {
             return oldItem == newItem
         }

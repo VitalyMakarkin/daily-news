@@ -19,5 +19,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Daily News"
+rootProject.name = "daily-news"
 include ':app'
