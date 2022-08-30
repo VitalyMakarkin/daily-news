@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "articles_table")
-data class ArticleModel(
+data class ArticleDB(
     @Embedded
     val source: SourceModel,
 

@@ -1,6 +1,6 @@
 package com.example.dailynews.model.network
 
-import com.example.dailynews.model.database.ArticleModel
+import com.example.dailynews.model.database.ArticleDB
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -55,15 +55,15 @@ data class ArticleResponse(
     )
 }
 
-fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleModel.SourceModel =
-    ArticleModel.SourceModel(
+fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleDB.SourceModel =
+    ArticleDB.SourceModel(
         id = this.id ?: "",
         name = this.name ?: ""
     )
 
-fun ArticleResponse.mapToDatabase(): ArticleModel =
-    ArticleModel(
-        source = this.source?.mapToDatabase() ?: ArticleModel.SourceModel(
+fun ArticleResponse.mapToDatabase(): ArticleDB =
+    ArticleDB(
+        source = this.source?.mapToDatabase() ?: ArticleDB.SourceModel(
             "",
             ""
         ),

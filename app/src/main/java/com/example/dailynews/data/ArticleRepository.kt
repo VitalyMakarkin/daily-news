@@ -1,7 +1,7 @@
 package com.example.dailynews.data
 
 import android.accounts.NetworkErrorException
-import com.example.dailynews.model.database.ArticleModel
+import com.example.dailynews.model.database.ArticleDB
 import com.example.dailynews.model.network.mapToDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ class ArticleRepository @Inject constructor(
     private val articlesDao: ArticlesDao,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getTopHeadlinesArticles(country: String): Result<List<ArticleModel>> {
+    suspend fun getTopHeadlinesArticles(country: String): Result<List<ArticleDB>> {
         return withContext(backgroundDispatcher) {
             val articlesDatabase = articlesDao.getArticles()
 
