@@ -45,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared"))
 
     // Core
     implementation 'androidx.core:core-ktx:1.8.0'
@@ -61,14 +62,14 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.2'
 
     // Dependency injection
-    implementation 'com.google.dagger:hilt-android:2.43.1'
-    kapt 'com.google.dagger:hilt-compiler:2.43.1'
+    implementation 'com.google.dagger:hilt-android:2.43.2'
+    kapt 'com.google.dagger:hilt-compiler:2.43.2'
 
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.43.1'
-    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.43.1'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.43.2'
 
     testImplementation 'com.google.dagger:hilt-android-testing:2.43.1'
-    kaptTest 'com.google.dagger:hilt-compiler:2.43.1'
+    kaptTest 'com.google.dagger:hilt-compiler:2.43.2'
 
     // Navigation
     implementation 'com.github.terrakok:cicerone:7.1'

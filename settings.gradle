@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "daily-news"
 include ':app'
+include ':shared'
