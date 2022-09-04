@@ -1,11 +1,11 @@
-package com.example.dailynews.ui.articles
+package com.example.shared.presentation.articles
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dailynews.domain.ArticleInteractor
-import com.example.dailynews.model.database.ArticleDB
+import com.example.shared.domain.ArticleInteractor
+import com.example.shared.model.database.ArticleDB
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

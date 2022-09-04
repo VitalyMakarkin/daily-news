@@ -1,10 +1,10 @@
-package com.example.dailynews.data
+package com.example.shared.data
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.example.dailynews.model.database.ArticleDB
+import com.example.shared.model.database.ArticleDB
 
 @Dao
 interface ArticlesDao {

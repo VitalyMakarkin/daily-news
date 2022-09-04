@@ -1,10 +1,10 @@
-package com.example.dailynews.model.network
+package com.example.shared.model.network
 
-import com.example.dailynews.model.database.ArticleDB
+import com.example.shared.model.database.ArticleDB
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class ArticlesPageResponse(
     @SerialName("status")
     val status: String,
@@ -16,7 +16,7 @@ data class ArticlesPageResponse(
     val articles: List<ArticleResponse>
 )
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class ArticleResponse(
     @SerialName("source")
     val source: SourceResponse?,

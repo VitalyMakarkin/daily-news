@@ -1,8 +1,8 @@
-package com.example.dailynews.data
+package com.example.shared.data
 
 import android.accounts.NetworkErrorException
-import com.example.dailynews.model.database.ArticleDB
-import com.example.dailynews.model.network.mapToDatabase
+import com.example.shared.model.database.ArticleDB
+import com.example.shared.model.network.mapToDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

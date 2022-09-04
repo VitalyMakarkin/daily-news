@@ -1,4 +1,4 @@
-package com.example.dailynews.module
+package com.example.dailynews.di
 
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder

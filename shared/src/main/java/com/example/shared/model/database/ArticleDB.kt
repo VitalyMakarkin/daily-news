@@ -1,4 +1,4 @@
-package com.example.dailynews.model.database
+package com.example.shared.model.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded

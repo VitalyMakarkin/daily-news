@@ -1,6 +1,6 @@
-package com.example.dailynews.module
+package com.example.shared.di
 
-import com.example.dailynews.BuildConfig
+import com.example.shared.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides

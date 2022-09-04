@@ -1,8 +1,8 @@
-package com.example.dailynews.data
+package com.example.shared.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.dailynews.model.database.ArticleDB
+import com.example.shared.model.database.ArticleDB
 
 @Database(entities = [ArticleDB::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

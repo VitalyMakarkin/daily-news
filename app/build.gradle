@@ -6,10 +6,6 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
-def apiKeyPropertiesFile = rootProject.file("apikey.properties")
-def apiKeyProperties = new Properties()
-apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
-
 android {
     compileSdk 32
 
@@ -21,8 +17,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField "String", "NEWSAPI_KEY", apiKeyProperties["NEWSAPI_KEY"]
     }
 
     buildFeatures {
@@ -73,18 +67,6 @@ dependencies {
 
     // Navigation
     implementation 'com.github.terrakok:cicerone:7.1'
-
-    // Serialization
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3'
-
-    // Network
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
-
-    // Local database
-    implementation 'androidx.room:room-runtime:2.4.3'
-    implementation 'androidx.room:room-ktx:2.4.3'
-    kapt 'androidx.room:room-compiler:2.4.3'
 
     // Logging
     implementation 'com.jakewharton.timber:timber:5.0.1'

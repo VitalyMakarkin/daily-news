@@ -1,7 +1,7 @@
-package com.example.dailynews.domain
+package com.example.shared.domain
 
-import com.example.dailynews.data.ArticleRepository
-import com.example.dailynews.model.database.ArticleDB
+import com.example.shared.data.ArticleRepository
+import com.example.shared.model.database.ArticleDB
 import javax.inject.Inject
 
 class ArticleInteractor @Inject constructor(

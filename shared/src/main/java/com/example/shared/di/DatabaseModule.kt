@@ -1,9 +1,9 @@
-package com.example.dailynews.module
+package com.example.shared.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.dailynews.data.AppDatabase
-import com.example.dailynews.data.ArticlesDao
+import com.example.shared.data.AppDatabase
+import com.example.shared.data.ArticlesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

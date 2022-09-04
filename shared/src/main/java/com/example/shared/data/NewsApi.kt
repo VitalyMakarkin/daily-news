@@ -1,6 +1,6 @@
-package com.example.dailynews.data
+package com.example.shared.data
 
-import com.example.dailynews.model.network.ArticlesPageResponse
+import com.example.shared.model.network.ArticlesPageResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
