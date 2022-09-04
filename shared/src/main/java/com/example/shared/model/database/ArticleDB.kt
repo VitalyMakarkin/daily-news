@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "articles_table")
 data class ArticleDB(
-    @Embedded
-    val source: SourceModel,
+    @Embedded(prefix = "source_")
+    val source: SourceDB,
 
     @ColumnInfo(name = "author")
     val author: String,
@@ -31,11 +31,11 @@ data class ArticleDB(
     @ColumnInfo(name = "content")
     val content: String,
 ) {
-    data class SourceModel(
-        @ColumnInfo(name = "source_id")
+    data class SourceDB(
+        @ColumnInfo(name = "id")
         val id: String,
 
-        @ColumnInfo(name = "source_name")
+        @ColumnInfo(name = "name")
         val name: String
     )
 

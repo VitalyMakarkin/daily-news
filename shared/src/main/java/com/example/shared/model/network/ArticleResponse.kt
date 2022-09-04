@@ -55,15 +55,15 @@ data class ArticleResponse(
     )
 }
 
-fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleDB.SourceModel =
-    ArticleDB.SourceModel(
+fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleDB.SourceDB =
+    ArticleDB.SourceDB(
         id = this.id ?: "",
         name = this.name ?: ""
     )
 
 fun ArticleResponse.mapToDatabase(): ArticleDB =
     ArticleDB(
-        source = this.source?.mapToDatabase() ?: ArticleDB.SourceModel(
+        source = this.source?.mapToDatabase() ?: ArticleDB.SourceDB(
             "",
             ""
         ),
