@@ -1,7 +1,8 @@
-package com.example.shared.data
+package com.example.shared.data.cached_articles
 
 import android.accounts.NetworkErrorException
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.data.NewsApi
+import com.example.shared.model.database.CachedArticleDB
 import com.example.shared.model.network.mapToDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -11,14 +12,14 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton // TODO: Create module
-class ArticleRepository @Inject constructor(
+class CachedArticlesRepository @Inject constructor(
     private val newsApi: NewsApi,
-    private val articlesDao: ArticlesDao,
+    private val articlesDao: CachedArticlesDao,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getArticles(country: String): Result<List<ArticleDB>> {
+    suspend fun getArticles(country: String): Result<List<CachedArticleDB>> {
         return withContext(backgroundDispatcher) {
-            val articlesDatabase = articlesDao.getArticles()
+            val articlesDatabase = articlesDao.getCachedArticles()
 
             if (articlesDatabase.isEmpty()) {
                 val response = newsApi.getTopHeadlinesArticles(country)
@@ -26,7 +27,7 @@ class ArticleRepository @Inject constructor(
                 try {
                     response.body()?.let {
                         val articles = it.articles.map { article -> article.mapToDatabase() }
-                        articlesDao.insertArticles(*articles.toTypedArray())
+                        articlesDao.insertCachedArticles(*articles.toTypedArray())
                         Result.success(articles)
                     }
                         ?: Result.failure(NetworkErrorException())

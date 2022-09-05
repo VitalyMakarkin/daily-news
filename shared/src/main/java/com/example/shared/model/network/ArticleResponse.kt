@@ -1,6 +1,6 @@
 package com.example.shared.model.network
 
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.model.database.CachedArticleDB
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -55,15 +55,15 @@ data class ArticleResponse(
     )
 }
 
-fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleDB.SourceDB =
-    ArticleDB.SourceDB(
+fun ArticleResponse.SourceResponse.mapToDatabase(): CachedArticleDB.SourceDB =
+    CachedArticleDB.SourceDB(
         id = this.id ?: "",
         name = this.name ?: ""
     )
 
-fun ArticleResponse.mapToDatabase(): ArticleDB =
-    ArticleDB(
-        source = this.source?.mapToDatabase() ?: ArticleDB.SourceDB(
+fun ArticleResponse.mapToDatabase(): CachedArticleDB =
+    CachedArticleDB(
+        source = this.source?.mapToDatabase() ?: CachedArticleDB.SourceDB(
             "",
             ""
         ),

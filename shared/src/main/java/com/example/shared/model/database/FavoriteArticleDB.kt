@@ -5,8 +5,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "articles_table")
-data class ArticleDB(
+@Entity(tableName = "favorite_articles")
+data class FavoriteArticleDB(
     @Embedded(prefix = "source_")
     val source: SourceDB,
 
