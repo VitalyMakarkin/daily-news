@@ -19,6 +19,9 @@ class ArticleInteractor @Inject constructor(
     }
 
     suspend fun addFavoriteArticle(id: Int) {
+        val article = articlesRepository.getArticleById(id)
+        // TODO: Map article to favorite article
+        // TODO: Pass favorite article as param
         return favoriteArticleRepository.addArticle(id)
     }
 

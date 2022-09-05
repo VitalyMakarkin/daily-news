@@ -20,8 +20,9 @@ class FavoriteArticlesRepository @Inject constructor(
         }
     }
 
+    // TODO: Change parameter to favorite article
     suspend fun addArticle(id: Int) {
-        TODO("Add favorite article by id:$id from cache")
+        TODO("Add favorite article")
     }
 
     suspend fun removeArticle(id: Int) {

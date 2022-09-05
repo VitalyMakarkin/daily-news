@@ -13,4 +13,7 @@ interface CachedArticlesDao {
 
     @Insert(onConflict = REPLACE)
     suspend fun insertCachedArticles(vararg article: CachedArticleDB)
+
+    @Query("SELECT * FROM cached_articles WHERE id = :id")
+    suspend fun getCachedArticleById(id: Int): CachedArticleDB
 }

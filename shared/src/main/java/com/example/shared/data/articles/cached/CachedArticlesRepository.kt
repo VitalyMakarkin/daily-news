@@ -19,9 +19,9 @@ class CachedArticlesRepository @Inject constructor(
 ) {
     suspend fun getArticles(country: String): Result<List<CachedArticleDB>> {
         return withContext(backgroundDispatcher) {
-            val articlesDatabase = articlesDao.getCachedArticles()
+            val articlesDB = articlesDao.getCachedArticles()
 
-            if (articlesDatabase.isEmpty()) {
+            if (articlesDB.isEmpty()) {
                 val response = newsApi.getTopHeadlinesArticles(country)
 
                 try {
@@ -35,7 +35,19 @@ class CachedArticlesRepository @Inject constructor(
                     Result.failure(NetworkErrorException())
                 }
             } else {
-                Result.success(articlesDatabase)
+                Result.success(articlesDB)
+            }
+        }
+    }
+
+    suspend fun getArticleById(id: Int) {
+        return withContext(backgroundDispatcher) {
+            try {
+                val articleDB = articlesDao.getCachedArticleById(id)
+                Result.success(articleDB)
+            } catch (error: Throwable) {
+                // TODO: Change error type
+                Result.failure(UnknownError())
             }
         }
     }
