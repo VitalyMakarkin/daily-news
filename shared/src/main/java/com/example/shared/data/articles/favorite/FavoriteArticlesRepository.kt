@@ -1,4 +1,4 @@
-package com.example.shared.data.favorite_articles
+package com.example.shared.data.articles.favorite
 
 import com.example.shared.model.database.FavoriteArticleDB
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,11 +20,11 @@ class FavoriteArticlesRepository @Inject constructor(
         }
     }
 
-    suspend fun addFavoriteArticle(id: Int) {
+    suspend fun addArticle(id: Int) {
         TODO("Add favorite article by id:$id from cache")
     }
 
-    suspend fun removeFavoriteArticle(id: Int) {
+    suspend fun removeArticle(id: Int) {
         TODO("Remove article by id:$id from favorites")
     }
 }

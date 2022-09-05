@@ -1,4 +1,4 @@
-package com.example.shared.data.favorite_articles
+package com.example.shared.data.articles.favorite
 
 import androidx.room.Dao
 import androidx.room.Insert

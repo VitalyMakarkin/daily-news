@@ -1,4 +1,4 @@
-package com.example.shared.data
+package com.example.shared.data.articles
 
 import com.example.shared.model.network.ArticlesPageResponse
 import retrofit2.Response

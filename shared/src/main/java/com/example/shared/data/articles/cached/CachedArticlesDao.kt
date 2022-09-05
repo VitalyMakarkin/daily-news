@@ -1,4 +1,4 @@
-package com.example.shared.data.cached_articles
+package com.example.shared.data.articles.cached
 
 import androidx.room.Dao
 import androidx.room.Insert

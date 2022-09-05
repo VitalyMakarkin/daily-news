@@ -1,7 +1,7 @@
-package com.example.shared.data.cached_articles
+package com.example.shared.data.articles.cached
 
 import android.accounts.NetworkErrorException
-import com.example.shared.data.NewsApi
+import com.example.shared.data.articles.NewsApi
 import com.example.shared.model.database.CachedArticleDB
 import com.example.shared.model.network.mapToDatabase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Singleton // TODO: Create module
+@Singleton
 class CachedArticlesRepository @Inject constructor(
     private val newsApi: NewsApi,
     private val articlesDao: CachedArticlesDao,
@@ -38,13 +38,5 @@ class CachedArticlesRepository @Inject constructor(
                 Result.success(articlesDatabase)
             }
         }
-    }
-
-    suspend fun addFavoriteArticle(id: Int) {
-        TODO("Add favorite article by id:$id from cache")
-    }
-
-    suspend fun removeFavoriteArticle(id: Int) {
-        TODO("Remove article by id:$id from favorites")
     }
 }

@@ -3,8 +3,8 @@ package com.example.shared.di
 import android.content.Context
 import androidx.room.Room
 import com.example.shared.data.AppDatabase
-import com.example.shared.data.cached_articles.CachedArticlesDao
-import com.example.shared.data.favorite_articles.FavoriteArticlesDao
+import com.example.shared.data.articles.cached.CachedArticlesDao
+import com.example.shared.data.articles.favorite.FavoriteArticlesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

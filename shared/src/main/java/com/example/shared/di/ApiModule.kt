@@ -1,6 +1,6 @@
 package com.example.shared.di
 
-import com.example.shared.data.NewsApi
+import com.example.shared.data.articles.NewsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
