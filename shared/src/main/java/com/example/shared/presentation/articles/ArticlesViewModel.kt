@@ -20,13 +20,35 @@ class ArticlesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            articleInteractor.getTopHeadlinesArticles("ru")
+            articleInteractor.getArticles("ru")
                 .onSuccess {
                     _articles.value = it
                 }
                 .onFailure {
                     TODO("Implement")
                 }
+        }
+    }
+
+    fun addArticleToFavorite(id: Int) {
+        viewModelScope.launch {
+            try {
+                articleInteractor.addFavoriteArticle(id)
+                // TODO: Update ui state as Success
+            } catch (error: Throwable) {
+                // TODO: Update ui state as Error (example: Toast)
+            }
+        }
+    }
+
+    fun removeArticleFromFavorite(id: Int) {
+        viewModelScope.launch {
+            try {
+                articleInteractor.removeFavoriteArticle(id)
+                // TODO: Update ui state as Success
+            } catch (error: Throwable) {
+                // TODO: Update ui state as Error (example: Toast)
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ class ArticleRepository @Inject constructor(
     private val articlesDao: ArticlesDao,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getTopHeadlinesArticles(country: String): Result<List<ArticleDB>> {
+    suspend fun getArticles(country: String): Result<List<ArticleDB>> {
         return withContext(backgroundDispatcher) {
             val articlesDatabase = articlesDao.getArticles()
 
@@ -37,5 +37,13 @@ class ArticleRepository @Inject constructor(
                 Result.success(articlesDatabase)
             }
         }
+    }
+
+    suspend fun addFavoriteArticle(id: Int) {
+        TODO("Add favorite article by id:$id from cache")
+    }
+
+    suspend fun removeFavoriteArticle(id: Int) {
+        TODO("Remove article by id:$id from favorites")
     }
 }

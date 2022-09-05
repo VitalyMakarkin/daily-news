@@ -7,7 +7,15 @@ import javax.inject.Inject
 class ArticleInteractor @Inject constructor(
     private val articleRepository: ArticleRepository
 ) {
-    suspend fun getTopHeadlinesArticles(country: String): Result<List<ArticleDB>> {
-        return articleRepository.getTopHeadlinesArticles(country)
+    suspend fun getArticles(country: String): Result<List<ArticleDB>> {
+        return articleRepository.getArticles(country)
+    }
+
+    suspend fun addFavoriteArticle(id: Int) {
+        return articleRepository.addFavoriteArticle(id)
+    }
+
+    suspend fun removeFavoriteArticle(id: Int) {
+        return articleRepository.removeFavoriteArticle(id)
     }
 }
