@@ -58,7 +58,10 @@ class ArticlesRepository @Inject constructor(
             isFavorite -> LocalDateTime.now().toString()
             else -> ""
         }
-
         articlesDao.updateArticleFavoritesAt(id, articleFavoriteAt)
+    }
+
+    suspend fun removeArticle(id: Int) {
+        articlesDao.removeArticle(id)
     }
 }

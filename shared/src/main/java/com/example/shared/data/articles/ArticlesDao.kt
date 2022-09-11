@@ -1,6 +1,7 @@
 package com.example.shared.data.articles
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
@@ -16,6 +17,9 @@ interface ArticlesDao {
 
     @Query("SELECT * FROM articles WHERE id = :id")
     suspend fun getArticleById(id: Int): ArticleDB
+
+    @Query("DELETE FROM articles WHERE id = :id")
+    suspend fun removeArticle(id: Int)
 
     @Query("SELECT id FROM articles WHERE author = :author AND title = :title AND publishedAt = :publishedAt")
     suspend fun checkArticleExists(

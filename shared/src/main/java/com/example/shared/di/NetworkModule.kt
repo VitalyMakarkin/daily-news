@@ -14,7 +14,6 @@ import retrofit2.Retrofit
 import timber.log.Timber
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
