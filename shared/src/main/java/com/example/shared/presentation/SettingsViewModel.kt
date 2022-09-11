@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.shared.domain.ArticleInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,11 +39,28 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiStateLiveData.value = UiStateView.Loading
 
-            // TODO: Define articlesCount
+            // TODO: Define articlesCount from articlesInteractor
+            val articlesCount = 0
 
-            // TODO: Define cachedArticlesCount
+            // TODO: Define cachedArticlesCount from articlesInteractor
+            val cachedArticlesCount = 0
 
-            // TODO: Define favoriteArticlesCount
+            // TODO: Define favoriteArticlesCount from articlesInteractor
+            val favoriteArticlesCount = 0
+
+            try {
+                _uiStateLiveData.value = UiStateView.Loading
+
+                _uiStateLiveData.value = UiStateView.Data(
+                    articlesCount = articlesCount,
+                    cachedArticlesCount = cachedArticlesCount,
+                    favoriteArticlesCount = favoriteArticlesCount
+                )
+
+            } catch (error: Throwable) {
+                _uiStateLiveData.value = UiStateView.Error(error)
+                Timber.w(error)
+            }
         }
     }
 
