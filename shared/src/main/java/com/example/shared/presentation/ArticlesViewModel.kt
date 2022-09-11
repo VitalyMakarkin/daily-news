@@ -8,6 +8,7 @@ import com.example.shared.domain.ArticleInteractor
 import com.example.shared.model.database.ArticleDB
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,18 +16,37 @@ class ArticlesViewModel @Inject constructor(
     private val articleInteractor: ArticleInteractor
 ) :
     ViewModel() {
-    private var _articles: MutableLiveData<List<ArticleDB>> = MutableLiveData()
-    val articles: LiveData<List<ArticleDB>> get() = _articles
+
+    sealed class UiStateView {
+        data class Data(val articles: List<ArticleDB>) : UiStateView()
+        object Loading : UiStateView()
+        class Error(val throwable: Throwable) : UiStateView()
+    }
+
+    private var _uiStateLiveData: MutableLiveData<UiStateView> =
+        MutableLiveData(UiStateView.Loading)
+    val uiStateLiveData: LiveData<UiStateView> get() = _uiStateLiveData
 
     init {
+        refresh()
+    }
+
+    fun refresh() {
         viewModelScope.launch {
-            articleInteractor.getArticles()
-                .onSuccess {
-                    _articles.value = it
-                }
-                .onFailure {
-                    // TODO: Throw error text in Toast
-                }
+            _uiStateLiveData.value = UiStateView.Loading
+            try {
+                articleInteractor.getArticles()
+                    .onSuccess {
+                        _uiStateLiveData.value = UiStateView.Data(it)
+                    }
+                    .onFailure {
+                        _uiStateLiveData.value = UiStateView.Error(it)
+                        Timber.w(it)
+                    }
+            } catch (error: Throwable) {
+                _uiStateLiveData.value = UiStateView.Error(error)
+                Timber.w(error)
+            }
         }
     }
 
