@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailynews.databinding.ItemArticleBinding
-import com.example.shared.model.database.CachedArticleDB
+import com.example.shared.model.database.ArticleDB
 
 class ArticlesAdapter :
-    ListAdapter<CachedArticleDB, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
+    ListAdapter<ArticleDB, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {
     class ViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -19,7 +19,7 @@ class ArticlesAdapter :
             }
         }
 
-        fun bind(article: CachedArticleDB) {
+        fun bind(article: ArticleDB) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
         }
@@ -34,14 +34,14 @@ class ArticlesAdapter :
         holder.bind(getItem(position))
     }
 
-    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<CachedArticleDB>() {
-        override fun areItemsTheSame(oldItem: CachedArticleDB, newItem: CachedArticleDB): Boolean {
+    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleDB>() {
+        override fun areItemsTheSame(oldItem: ArticleDB, newItem: ArticleDB): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: CachedArticleDB,
-            newItem: CachedArticleDB
+            oldItem: ArticleDB,
+            newItem: ArticleDB
         ): Boolean {
             return oldItem == newItem
         }

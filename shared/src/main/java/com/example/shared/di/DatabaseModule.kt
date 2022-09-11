@@ -3,8 +3,7 @@ package com.example.shared.di
 import android.content.Context
 import androidx.room.Room
 import com.example.shared.data.AppDatabase
-import com.example.shared.data.articles.cached.CachedArticlesDao
-import com.example.shared.data.articles.favorite.FavoriteArticlesDao
+import com.example.shared.data.articles.ArticlesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,11 +26,6 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideCachedArticlesDao(db: AppDatabase): CachedArticlesDao =
-        db.getCachedArticlesDao()
-
-    @Provides
-    @Singleton
-    fun provideFavoriteArticlesDao(db: AppDatabase): FavoriteArticlesDao =
-        db.getFavoriteArticlesDao()
+    fun provideArticlesDao(db: AppDatabase): ArticlesDao =
+        db.getArticlesDao()
 }

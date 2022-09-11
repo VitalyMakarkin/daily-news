@@ -1,50 +1,39 @@
-package com.example.shared.presentation.articles
+package com.example.shared.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shared.domain.ArticleInteractor
-import com.example.shared.model.database.CachedArticleDB
+import com.example.shared.model.database.ArticleDB
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ArticlesViewModel @Inject constructor(
+class FavoriteArticlesViewModel @Inject constructor(
     private val articleInteractor: ArticleInteractor
 ) :
     ViewModel() {
-    private var _articles: MutableLiveData<List<CachedArticleDB>> = MutableLiveData()
-    val articles: LiveData<List<CachedArticleDB>> get() = _articles
+    private var _articles: MutableLiveData<List<ArticleDB>> = MutableLiveData()
+    val articles: LiveData<List<ArticleDB>> get() = _articles
 
     init {
         viewModelScope.launch {
-            articleInteractor.getArticles("ru")
+            articleInteractor.getFavoriteArticles()
                 .onSuccess {
                     _articles.value = it
                 }
                 .onFailure {
-                    TODO("Implement")
+                    // TODO: Throw error text in Toast
                 }
         }
     }
 
-    fun addArticleToFavorite(id: Int) {
+    fun removeArticleFromFavorites(id: Int) {
         viewModelScope.launch {
             try {
-                articleInteractor.addFavoriteArticle(id)
-                // TODO: Update ui state as Success
-            } catch (error: Throwable) {
-                // TODO: Update ui state as Error (example: Toast)
-            }
-        }
-    }
-
-    fun removeArticleFromFavorite(id: Int) {
-        viewModelScope.launch {
-            try {
-                articleInteractor.removeFavoriteArticle(id)
+                articleInteractor.setArticleFavoriteState(id, false)
                 // TODO: Update ui state as Success
             } catch (error: Throwable) {
                 // TODO: Update ui state as Error (example: Toast)

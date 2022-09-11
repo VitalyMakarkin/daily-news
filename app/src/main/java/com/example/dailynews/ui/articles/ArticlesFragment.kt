@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dailynews.databinding.FragmentArticlesBinding
-import com.example.shared.presentation.articles.ArticlesViewModel
+import com.example.shared.presentation.ArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

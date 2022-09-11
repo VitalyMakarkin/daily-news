@@ -1,8 +1,9 @@
 package com.example.shared.model.network
 
-import com.example.shared.model.database.CachedArticleDB
+import com.example.shared.model.database.ArticleDB
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
 
 @kotlinx.serialization.Serializable
 data class ArticlesPageResponse(
@@ -55,15 +56,15 @@ data class ArticleResponse(
     )
 }
 
-fun ArticleResponse.SourceResponse.mapToDatabase(): CachedArticleDB.SourceDB =
-    CachedArticleDB.SourceDB(
+fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleDB.SourceDB =
+    ArticleDB.SourceDB(
         id = this.id ?: "",
         name = this.name ?: ""
     )
 
-fun ArticleResponse.mapToDatabase(): CachedArticleDB =
-    CachedArticleDB(
-        source = this.source?.mapToDatabase() ?: CachedArticleDB.SourceDB(
+fun ArticleResponse.mapToDatabase(): ArticleDB =
+    ArticleDB(
+        source = this.source?.mapToDatabase() ?: ArticleDB.SourceDB(
             "",
             ""
         ),
@@ -73,5 +74,7 @@ fun ArticleResponse.mapToDatabase(): CachedArticleDB =
         url = this.url ?: "",
         urlToImage = this.urlToImage ?: "",
         publishedAt = this.publishedAt ?: "",
-        content = this.content ?: ""
+        content = this.content ?: "",
+        cachedAt = LocalDateTime.now().toString(),
+        favoritesAt = ""
     )

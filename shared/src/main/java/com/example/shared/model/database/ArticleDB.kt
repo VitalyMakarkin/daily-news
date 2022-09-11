@@ -5,8 +5,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorite_articles")
-data class FavoriteArticleDB(
+@Entity(tableName = "articles")
+data class ArticleDB(
     @Embedded(prefix = "source_")
     val source: SourceDB,
 
@@ -30,6 +30,12 @@ data class FavoriteArticleDB(
 
     @ColumnInfo(name = "content")
     val content: String,
+
+    @ColumnInfo(name = "cachedAt")
+    val cachedAt: String,
+
+    @ColumnInfo(name = "favoritesAt")
+    val favoritesAt: String
 ) {
     data class SourceDB(
         @ColumnInfo(name = "id")

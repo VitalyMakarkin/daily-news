@@ -1,8 +1,8 @@
-package com.example.shared.presentation.favorites
+package com.example.shared.presentation
 
-data class FavoriteArticleModel(
+data class ArticleModel(
     val id: Int,
-    val source: FavoriteSourceModel,
+    val source: SourceModel,
     val author: String,
     val title: String,
     val description: String,
@@ -10,9 +10,12 @@ data class FavoriteArticleModel(
     val urlToImage: String,
     val publishedAt: String,
     val content: String,
+    val favoritesAt: String
 ) {
-    data class FavoriteSourceModel(
+    data class SourceModel(
         val id: String,
         val name: String
     )
+
+    val isFavorite: Boolean get() = favoritesAt.isNotEmpty()
 }

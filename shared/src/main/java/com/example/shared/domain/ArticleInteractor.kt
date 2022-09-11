@@ -1,31 +1,23 @@
 package com.example.shared.domain
 
-import com.example.shared.data.articles.cached.CachedArticlesRepository
-import com.example.shared.data.articles.favorite.FavoriteArticlesRepository
-import com.example.shared.model.database.CachedArticleDB
-import com.example.shared.model.database.FavoriteArticleDB
+import com.example.shared.data.articles.ArticlesRepository
+import com.example.shared.model.database.ArticleDB
 import javax.inject.Inject
 
 class ArticleInteractor @Inject constructor(
-    private val articlesRepository: CachedArticlesRepository,
-    private val favoriteArticleRepository: FavoriteArticlesRepository
+    private val articlesRepository: ArticlesRepository,
 ) {
-    suspend fun getArticles(country: String): Result<List<CachedArticleDB>> {
-        return articlesRepository.getArticles(country)
+    suspend fun getArticles(): Result<List<ArticleDB>> {
+        return articlesRepository.getArticles()
     }
 
-    suspend fun getFavoriteArticles(): Result<List<FavoriteArticleDB>> {
-        return favoriteArticleRepository.getArticles()
+    suspend fun getFavoriteArticles(): Result<List<ArticleDB>> {
+        return articlesRepository.getArticles().map { articlesList ->
+            articlesList.filter { it.favoritesAt != "" }
+        }
     }
 
-    suspend fun addFavoriteArticle(id: Int) {
-        val article = articlesRepository.getArticleById(id)
-        // TODO: Map article to favorite article
-        // TODO: Pass favorite article as param
-        return favoriteArticleRepository.addArticle(id)
-    }
-
-    suspend fun removeFavoriteArticle(id: Int) {
-        return favoriteArticleRepository.removeArticle(id)
+    suspend fun setArticleFavoriteState(id: Int, isFavorite: Boolean) {
+        return articlesRepository.setArticleFavoriteState(id, isFavorite)
     }
 }
