@@ -34,6 +34,7 @@ class ArticlesViewModel @Inject constructor(
     fun refresh() {
         viewModelScope.launch {
             _uiStateLiveData.value = UiStateView.Loading
+
             try {
                 articleInteractor.getArticles()
                     .onSuccess {
