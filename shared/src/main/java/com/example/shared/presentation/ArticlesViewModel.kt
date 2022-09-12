@@ -36,7 +36,7 @@ class ArticlesViewModel @Inject constructor(
             _uiStateLiveData.value = UiStateView.Loading
 
             try {
-                articleInteractor.getArticles()
+                articleInteractor.getArticles(preferred_cache = false)
                     .onSuccess {
                         _uiStateLiveData.value = UiStateView.Data(it)
                     }

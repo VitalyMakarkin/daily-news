@@ -12,14 +12,15 @@ class ArticleInteractor @Inject constructor(
     private val articlesRepository: ArticlesRepository,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getArticles(): Result<List<ArticleDB>> {
-        return articlesRepository.getArticles()
+    suspend fun getArticles(preferred_cache: Boolean): Result<List<ArticleDB>> {
+        return articlesRepository.getArticles(preferred_cache)
     }
 
     suspend fun getFavoriteArticles(): Result<List<ArticleDB>> {
-        return articlesRepository.getArticles().map { articlesList ->
-            articlesList.filter { it.favoritesAt != "" }
-        }
+        return articlesRepository.getArticles(preferred_cache = true)
+            .map { articlesList ->
+                articlesList.filter { it.favoritesAt != "" }
+            }
     }
 
     suspend fun setArticleFavoriteState(id: Int, isFavorite: Boolean) {
@@ -28,21 +29,23 @@ class ArticleInteractor @Inject constructor(
 
     suspend fun removeCachedArticles() {
         return withContext(backgroundDispatcher) {
-            articlesRepository.getArticles().map { articlesList ->
-                articlesList
-                    .filter { it.favoritesAt == "" }
-                    .map { articlesRepository.removeArticle(it.id) }
-            }
+            articlesRepository.getArticles(preferred_cache = true)
+                .map { articlesList ->
+                    articlesList
+                        .filter { it.favoritesAt == "" }
+                        .map { articlesRepository.removeArticle(it.id) }
+                }
         }
     }
 
     suspend fun removeFavoriteArticles() {
         return withContext(backgroundDispatcher) {
-            articlesRepository.getArticles().map { articlesList ->
-                articlesList
-                    .filter { it.favoritesAt != "" }
-                    .map { articlesRepository.setArticleFavoriteState(it.id, false) }
-            }
+            articlesRepository.getArticles(preferred_cache = true)
+                .map { articlesList ->
+                    articlesList
+                        .filter { it.favoritesAt != "" }
+                        .map { articlesRepository.setArticleFavoriteState(it.id, false) }
+                }
         }
     }
 }

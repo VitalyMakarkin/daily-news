@@ -17,28 +17,30 @@ class ArticlesRepository @Inject constructor(
     private val articlesDao: ArticlesDao,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getArticles(): Result<List<ArticleDB>> {
+    suspend fun getArticles(preferred_cache: Boolean): Result<List<ArticleDB>> {
         return withContext(backgroundDispatcher) {
-            val response = newsApi.getTopHeadlinesArticles("ru")
 
-            try {
-                response.body()?.let {
-                    val articles = it.articles.map { article -> article.mapToDatabase() }
+            if (!preferred_cache) {
+                val response = newsApi.getTopHeadlinesArticles("ru")
 
-                    articles.map { article ->
-                        val articleId = articlesDao.checkArticleExists(
-                            article.author, article.title, article.publishedAt
-                        )
-                        if (articleId == null) articlesDao.insertArticles(article)
-                    }
+                try {
+                    response.body()?.let {
+                        val articles = it.articles.map { article -> article.mapToDatabase() }
 
-                    val articlesDB = articlesDao.getArticles()
-                    Result.success(articlesDB)
+                        articles.map { article ->
+                            val articleId = articlesDao.checkArticleExists(
+                                article.author, article.title, article.publishedAt
+                            )
+                            if (articleId == null) articlesDao.insertArticles(article)
+                        }
+                    } ?: Result.failure<Throwable>(NetworkErrorException())
+                } catch (e: Throwable) {
+                    Result.failure<Throwable>(NetworkErrorException())
                 }
-                    ?: Result.failure(NetworkErrorException())
-            } catch (e: Throwable) {
-                Result.failure(NetworkErrorException())
             }
+
+            val articlesDB = articlesDao.getArticles()
+            Result.success(articlesDB)
         }
     }
 
