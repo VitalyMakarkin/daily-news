@@ -2,9 +2,9 @@ package com.example.shared.data.repository
 
 import android.accounts.NetworkErrorException
 import com.example.shared.data.api.NewsApi
+import com.example.shared.data.api.mapper.mapToDatabase
 import com.example.shared.data.db.dao.ArticlesDao
 import com.example.shared.data.db.model.ArticleDB
-import com.example.shared.model.network.mapToDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

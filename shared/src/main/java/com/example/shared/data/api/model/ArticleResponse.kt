@@ -1,9 +1,7 @@
-package com.example.shared.model.network
+package com.example.shared.data.api.model
 
-import com.example.shared.data.db.model.ArticleDB
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
 
 @Serializable
 data class ArticlesPageResponse(
@@ -31,15 +29,12 @@ data class ArticleResponse(
     @SerialName("description")
     val description: String?,
 
-    // TODO("Convert field type from String to Uri")
     @SerialName("url")
     val url: String?,
 
-    // TODO("Convert field type from String to Uri")
     @SerialName("urlToImage")
     val urlToImage: String?,
 
-    // TODO("Convert field type from String to Date")
     @SerialName("publishedAt")
     val publishedAt: String?,
 
@@ -55,26 +50,3 @@ data class ArticleResponse(
         val name: String?
     )
 }
-
-fun ArticleResponse.SourceResponse.mapToDatabase(): ArticleDB.SourceDB =
-    ArticleDB.SourceDB(
-        id = this.id ?: "",
-        name = this.name ?: ""
-    )
-
-fun ArticleResponse.mapToDatabase(): ArticleDB =
-    ArticleDB(
-        source = this.source?.mapToDatabase() ?: ArticleDB.SourceDB(
-            "",
-            ""
-        ),
-        author = this.author ?: "",
-        title = this.title ?: "",
-        description = this.description ?: "",
-        url = this.url ?: "",
-        urlToImage = this.urlToImage ?: "",
-        publishedAt = this.publishedAt ?: "",
-        content = this.content ?: "",
-        cachedAt = LocalDateTime.now().toString(),
-        favoritesAt = ""
-    )

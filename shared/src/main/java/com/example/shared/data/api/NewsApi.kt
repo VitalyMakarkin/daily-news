@@ -1,6 +1,6 @@
 package com.example.shared.data.api
 
-import com.example.shared.model.network.ArticlesPageResponse
+import com.example.shared.data.api.model.ArticlesPageResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
