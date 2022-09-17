@@ -1,9 +1,9 @@
-package com.example.shared.data
+package com.example.shared.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.shared.data.articles.ArticlesDao
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.data.db.dao.ArticlesDao
+import com.example.shared.data.db.model.ArticleDB
 
 @Database(
     entities = [ArticleDB::class],

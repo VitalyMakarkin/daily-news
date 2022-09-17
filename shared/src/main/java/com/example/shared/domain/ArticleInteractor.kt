@@ -1,7 +1,7 @@
 package com.example.shared.domain
 
-import com.example.shared.data.articles.ArticlesRepository
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.data.repository.ArticlesRepository
+import com.example.shared.data.db.model.ArticleDB
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

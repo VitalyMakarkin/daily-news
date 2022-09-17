@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailynews.databinding.ItemArticleBinding
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.data.db.model.ArticleDB
 
 class ArticlesAdapter :
     ListAdapter<ArticleDB, ArticlesAdapter.ViewHolder>(ArticlesDiffUtilsItemCallback) {

@@ -2,8 +2,8 @@ package com.example.shared.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.shared.data.AppDatabase
-import com.example.shared.data.articles.ArticlesDao
+import com.example.shared.data.db.AppDatabase
+import com.example.shared.data.db.dao.ArticlesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

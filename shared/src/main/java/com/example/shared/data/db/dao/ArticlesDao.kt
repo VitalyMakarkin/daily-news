@@ -1,11 +1,10 @@
-package com.example.shared.data.articles
+package com.example.shared.data.db.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.data.db.model.ArticleDB
 
 @Dao
 interface ArticlesDao {

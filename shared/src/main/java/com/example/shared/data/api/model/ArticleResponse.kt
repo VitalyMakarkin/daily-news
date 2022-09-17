@@ -1,11 +1,11 @@
 package com.example.shared.model.network
 
-import com.example.shared.model.database.ArticleDB
+import com.example.shared.data.db.model.ArticleDB
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class ArticlesPageResponse(
     @SerialName("status")
     val status: String,
@@ -17,7 +17,7 @@ data class ArticlesPageResponse(
     val articles: List<ArticleResponse>
 )
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class ArticleResponse(
     @SerialName("source")
     val source: SourceResponse?,

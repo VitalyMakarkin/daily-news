@@ -1,8 +1,8 @@
-package com.example.shared.presentation
+package com.example.shared.presentation.model
 
-data class ArticleModel(
+data class ArticleUI(
     val id: Int,
-    val source: SourceModel,
+    val source: SourceUI,
     val author: String,
     val title: String,
     val description: String,
@@ -12,7 +12,7 @@ data class ArticleModel(
     val content: String,
     val favoritesAt: String
 ) {
-    data class SourceModel(
+    data class SourceUI(
         val id: String,
         val name: String
     )
