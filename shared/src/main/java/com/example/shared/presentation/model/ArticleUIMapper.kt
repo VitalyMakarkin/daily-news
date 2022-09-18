@@ -2,11 +2,11 @@ package com.example.shared.presentation.model
 
 import com.example.shared.domain.model.Article
 
-fun ArticleUI.mapFromDomain(article: Article) = ArticleUI(
-    id = article.id,
-    author = article.author,
-    title = article.title,
-    description = article.description,
-    publishedAt = article.publishedAt,
-    isFavorite = article.isFavorite
+fun Article.mapToUI() = ArticleUI(
+    id = this.id,
+    author = this.author,
+    title = this.title,
+    description = this.description,
+    publishedAt = this.publishedAt,
+    isFavorite = this.isFavorite
 )
