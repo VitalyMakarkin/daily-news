@@ -46,13 +46,9 @@ class ArticlesAdapter :
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(
-            oldItem: ArticleUI,
-            newItem: ArticleUI
-        ): Boolean {
+        override fun areContentsTheSame(oldItem: ArticleUI, newItem: ArticleUI): Boolean {
             return oldItem == newItem
         }
-
     }
 
     class TextViewHolder(private val binding: ItemTextArticleBinding) :
