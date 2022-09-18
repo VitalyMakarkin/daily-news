@@ -4,7 +4,7 @@ import android.accounts.NetworkErrorException
 import com.example.shared.data.api.NewsApi
 import com.example.shared.data.api.mapper.mapToDatabase
 import com.example.shared.data.db.dao.ArticlesDao
-import com.example.shared.data.db.mapper.mapToDomain
+import com.example.shared.data.db.model.mapToDomain
 import com.example.shared.domain.model.Article
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
