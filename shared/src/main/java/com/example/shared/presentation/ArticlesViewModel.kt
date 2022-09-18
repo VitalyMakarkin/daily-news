@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shared.domain.ArticleInteractor
-import com.example.shared.data.db.model.ArticleDB
+import com.example.shared.presentation.model.ArticleUI
+import com.example.shared.presentation.model.mapToUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -18,7 +19,7 @@ class ArticlesViewModel @Inject constructor(
     ViewModel() {
 
     sealed class UiStateView {
-        data class Data(val articles: List<ArticleDB>) : UiStateView()
+        data class Data(val articles: List<ArticleUI>) : UiStateView()
         object Loading : UiStateView()
         class Error(val throwable: Throwable) : UiStateView()
     }
@@ -37,8 +38,9 @@ class ArticlesViewModel @Inject constructor(
 
             try {
                 articleInteractor.getArticles(preferred_cache = false)
-                    .onSuccess {
-                        _uiStateLiveData.value = UiStateView.Data(it)
+                    .onSuccess { articles ->
+                        val articlesUI = articles.map { it.mapToUI() }
+                        _uiStateLiveData.value = UiStateView.Data(articlesUI)
                     }
                     .onFailure {
                         _uiStateLiveData.value = UiStateView.Error(it)

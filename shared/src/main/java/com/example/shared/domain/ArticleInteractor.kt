@@ -1,7 +1,7 @@
 package com.example.shared.domain
 
 import com.example.shared.data.repository.ArticlesRepository
-import com.example.shared.data.db.model.ArticleDB
+import com.example.shared.domain.model.Article
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,14 +12,14 @@ class ArticleInteractor @Inject constructor(
     private val articlesRepository: ArticlesRepository,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getArticles(preferred_cache: Boolean): Result<List<ArticleDB>> {
+    suspend fun getArticles(preferred_cache: Boolean): Result<List<Article>> {
         return articlesRepository.getArticles(preferred_cache)
     }
 
-    suspend fun getFavoriteArticles(): Result<List<ArticleDB>> {
+    suspend fun getFavoriteArticles(): Result<List<Article>> {
         return articlesRepository.getArticles(preferred_cache = true)
             .map { articlesList ->
-                articlesList.filter { it.favoritesAt != "" }
+                articlesList.filter { it.isFavorite }
             }
     }
 
@@ -32,7 +32,7 @@ class ArticleInteractor @Inject constructor(
             articlesRepository.getArticles(preferred_cache = true)
                 .map { articlesList ->
                     articlesList
-                        .filter { it.favoritesAt == "" }
+                        .filter { !it.isFavorite }
                         .map { articlesRepository.removeArticle(it.id) }
                 }
         }
@@ -43,7 +43,7 @@ class ArticleInteractor @Inject constructor(
             articlesRepository.getArticles(preferred_cache = true)
                 .map { articlesList ->
                     articlesList
-                        .filter { it.favoritesAt != "" }
+                        .filter { it.isFavorite }
                         .map { articlesRepository.setArticleFavoriteState(it.id, false) }
                 }
         }

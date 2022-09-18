@@ -4,7 +4,8 @@ import android.accounts.NetworkErrorException
 import com.example.shared.data.api.NewsApi
 import com.example.shared.data.api.mapper.mapToDatabase
 import com.example.shared.data.db.dao.ArticlesDao
-import com.example.shared.data.db.model.ArticleDB
+import com.example.shared.data.db.mapper.mapToDomain
+import com.example.shared.domain.model.Article
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,7 +20,7 @@ class ArticlesRepository @Inject constructor(
     private val articlesDao: ArticlesDao,
     @Named("IO") private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun getArticles(preferred_cache: Boolean): Result<List<ArticleDB>> {
+    suspend fun getArticles(preferred_cache: Boolean): Result<List<Article>> {
         return withContext(backgroundDispatcher) {
 
             if (!preferred_cache) {
@@ -41,8 +42,8 @@ class ArticlesRepository @Inject constructor(
                 }
             }
 
-            val articlesDB = articlesDao.getArticles()
-            Result.success(articlesDB)
+            val articles = articlesDao.getArticles().map { it.mapToDomain() }
+            Result.success(articles)
         }
     }
 
