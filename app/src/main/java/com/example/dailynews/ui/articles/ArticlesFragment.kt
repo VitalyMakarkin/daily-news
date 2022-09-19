@@ -17,14 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class ArticlesFragment : Fragment() {
 
     private val viewModel: ArticlesViewModel by viewModels()
-    private lateinit var binding: FragmentArticlesBinding
+
+    private var _binding: FragmentArticlesBinding? = null
+    private val binding get() = _binding!!
+
     private val articlesAdapter: ArticlesAdapter by lazy { ArticlesAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentArticlesBinding.inflate(inflater, container, false)
+        _binding = FragmentArticlesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,6 +43,11 @@ class ArticlesFragment : Fragment() {
         viewModel.uiStateLiveData
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { render(it) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun render(uiStateView: ArticlesViewModel.UiStateView) {
