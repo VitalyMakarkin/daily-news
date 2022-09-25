@@ -51,9 +51,9 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun render(uiStateView: ArticlesViewModel.UiStateView) {
-        // TODO: Implement visibility: uiStateView is ArticlesViewModel.UiStateView.Loading
+        binding.progressIndicator.isVisible = uiStateView is ArticlesViewModel.UiStateView.Loading
         binding.articlesRv.isVisible = uiStateView is ArticlesViewModel.UiStateView.Data
-        // TODO: Implement visibility: uiStateView is ArticlesViewModel.UiStateView.Error
+        binding.errorsLayout.isVisible = uiStateView is ArticlesViewModel.UiStateView.Error
 
         when (uiStateView) {
             is ArticlesViewModel.UiStateView.Loading -> {
