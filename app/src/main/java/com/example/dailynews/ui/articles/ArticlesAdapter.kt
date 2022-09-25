@@ -21,8 +21,9 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
     ListAdapter<ArticleUI, RecyclerView.ViewHolder>(ArticlesDiffUtilsItemCallback) {
 
     interface ItemHandler {
-        fun onItemClicked()
-        fun onFavoriteItemMarked()
+        fun onItemClicked(articleId: Int)
+        fun onFavoriteItemMarked(articleId: Int)
+        fun onFavoriteItemUnmarked(articleId: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -81,15 +82,17 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
                 setFavoriteMark(false)
             }
 
-            itemView.setOnClickListener { itemHandler.onItemClicked() }
+            itemView.setOnClickListener {
+                itemHandler.onItemClicked(article.id)
+            }
 
             binding.favoriteMarkedIv.setOnClickListener {
-                itemHandler.onFavoriteItemMarked()
+                itemHandler.onFavoriteItemUnmarked(article.id)
                 setFavoriteMark(false)
             }
 
             binding.favoriteUnmarkedIv.setOnClickListener {
-                itemHandler.onFavoriteItemMarked()
+                itemHandler.onFavoriteItemMarked(article.id)
                 setFavoriteMark(true)
             }
         }
@@ -122,15 +125,17 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
                 setFavoriteMark(false)
             }
 
-            itemView.setOnClickListener { itemHandler.onItemClicked() }
+            itemView.setOnClickListener {
+                itemHandler.onItemClicked(article.id)
+            }
 
             binding.favoriteMarkedIv.setOnClickListener {
-                itemHandler.onFavoriteItemMarked()
+                itemHandler.onFavoriteItemUnmarked(article.id)
                 setFavoriteMark(false)
             }
 
             binding.favoriteUnmarkedIv.setOnClickListener {
-                itemHandler.onFavoriteItemMarked()
+                itemHandler.onFavoriteItemMarked(article.id)
                 setFavoriteMark(true)
             }
         }

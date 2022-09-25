@@ -51,12 +51,16 @@ class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
         _binding = null
     }
 
-    override fun onItemClicked() {
+    override fun onItemClicked(articleId: Int) {
         Timber.d("onItemClicked()")
     }
 
-    override fun onFavoriteItemMarked() {
-        Timber.d("onFavoriteItemMarked()")
+    override fun onFavoriteItemMarked(articleId: Int) {
+        viewModel.addArticleToFavorites(articleId)
+    }
+
+    override fun onFavoriteItemUnmarked(articleId: Int) {
+        viewModel.removeArticleFromFavorites(articleId)
     }
 
     private fun render(uiStateView: ArticlesViewModel.UiStateView) {
