@@ -2,6 +2,7 @@ package com.example.dailynews.ui.articles
 
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -66,7 +67,18 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
             binding.publishedAtTv.text = article.publishedAt
 
             itemView.setOnClickListener { itemHandler.onItemClicked() }
-//            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
+
+            binding.favoriteMarkedIv.setOnClickListener {
+                itemHandler.onFavoriteItemMarked()
+                binding.favoriteMarkedIv.visibility = View.GONE
+                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
+            }
+
+            binding.favoriteUnmarkedIv.setOnClickListener {
+                itemHandler.onFavoriteItemMarked()
+                binding.favoriteMarkedIv.visibility = View.VISIBLE
+                binding.favoriteUnmarkedIv.visibility = View.GONE
+            }
         }
     }
 
@@ -82,7 +94,17 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
             }
 
             itemView.setOnClickListener { itemHandler.onItemClicked() }
-//            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
+            binding.favoriteMarkedIv.setOnClickListener {
+                itemHandler.onFavoriteItemMarked()
+                binding.favoriteMarkedIv.visibility = View.GONE
+                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
+            }
+
+            binding.favoriteUnmarkedIv.setOnClickListener {
+                itemHandler.onFavoriteItemMarked()
+                binding.favoriteMarkedIv.visibility = View.VISIBLE
+                binding.favoriteUnmarkedIv.visibility = View.GONE
+            }
         }
     }
 }
