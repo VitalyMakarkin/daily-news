@@ -15,8 +15,13 @@ import com.example.shared.presentation.model.TextArticleUI
 const val TYPE_TEXT = 0
 const val TYPE_IMAGE = 1
 
-class ArticlesAdapter :
+class ArticlesAdapter(private val itemHandler: ItemHandler) :
     ListAdapter<ArticleUI, RecyclerView.ViewHolder>(ArticlesDiffUtilsItemCallback) {
+
+    interface ItemHandler {
+        fun onItemClicked()
+        fun onFavoriteItemMarked()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -29,8 +34,8 @@ class ArticlesAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TextViewHolder -> holder.bind(getItem(position) as TextArticleUI)
-            is ImageViewHolder -> holder.bind(getItem(position) as ImageArticleUI)
+            is TextViewHolder -> holder.bind(getItem(position) as TextArticleUI, itemHandler)
+            is ImageViewHolder -> holder.bind(getItem(position) as ImageArticleUI, itemHandler)
         }
     }
 
@@ -54,31 +59,25 @@ class ArticlesAdapter :
     class TextViewHolder(private val binding: ItemTextArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            itemView.setOnClickListener {
-                // TODO("Implement and bind onItemClick to display article by using navigation")
-            }
-        }
-
-        fun bind(article: TextArticleUI) {
+        fun bind(article: TextArticleUI, itemHandler: ItemHandler) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
+
+            itemView.setOnClickListener { itemHandler.onItemClicked() }
+//            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
         }
     }
 
     class ImageViewHolder(private val binding: ItemImageArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            itemView.setOnClickListener {
-                // TODO("Implement and bind onItemClick to display article by using navigation")
-            }
-        }
-
-        fun bind(article: ImageArticleUI) {
+        fun bind(article: ImageArticleUI, itemHandler: ItemHandler) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
             binding.imageIv.setImageURI(article.urlToImage.toUri())
+
+            itemView.setOnClickListener { itemHandler.onItemClicked() }
+            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
         }
     }
 }

@@ -12,16 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dailynews.databinding.FragmentArticlesBinding
 import com.example.shared.presentation.ArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
-class ArticlesFragment : Fragment() {
+class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
 
     private val viewModel: ArticlesViewModel by viewModels()
 
     private var _binding: FragmentArticlesBinding? = null
     private val binding get() = _binding!!
 
-    private val articlesAdapter: ArticlesAdapter by lazy { ArticlesAdapter() }
+    private val articlesAdapter: ArticlesAdapter by lazy { ArticlesAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +49,14 @@ class ArticlesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClicked() {
+        Timber.d("onItemClicked()")
+    }
+
+    override fun onFavoriteItemMarked() {
+        Timber.d("onFavoriteItemMarked()")
     }
 
     private fun render(uiStateView: ArticlesViewModel.UiStateView) {
