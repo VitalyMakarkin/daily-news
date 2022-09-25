@@ -77,7 +77,7 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
             binding.imageIv.setImageURI(article.urlToImage.toUri())
 
             itemView.setOnClickListener { itemHandler.onItemClicked() }
-            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
+//            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
         }
     }
 }
