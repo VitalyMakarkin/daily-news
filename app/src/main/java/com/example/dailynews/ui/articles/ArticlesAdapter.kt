@@ -61,6 +61,7 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
 
         fun bind(article: TextArticleUI, itemHandler: ItemHandler) {
             binding.titleTv.text = article.title
+            binding.descriptionTv.text = article.description
             binding.publishedAtTv.text = article.publishedAt
 
             itemView.setOnClickListener { itemHandler.onItemClicked() }

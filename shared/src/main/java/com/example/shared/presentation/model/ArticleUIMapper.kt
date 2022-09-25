@@ -14,6 +14,7 @@ fun Article.mapToUI(): ArticleUI {
         else -> TextArticleUI(
             id = this.id,
             title = this.title,
+            description = this.description,
             publishedAt = this.publishedAt,
             isFavorite = this.isFavorite
         )
