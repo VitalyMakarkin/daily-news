@@ -52,8 +52,8 @@
 
     <ImageView
         android:id="@+id/favorite_marked_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="12dp"
@@ -65,8 +65,8 @@
 
     <ImageView
         android:id="@+id/favorite_unmarked_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="12dp"

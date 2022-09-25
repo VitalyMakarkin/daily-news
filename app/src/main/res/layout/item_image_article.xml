@@ -8,6 +8,18 @@
     android:paddingTop="6dp"
     android:paddingBottom="6dp">
 
+    <ImageView
+        android:id="@+id/image_iv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="0dp"
@@ -18,21 +30,10 @@
         android:layout_marginBottom="6dp"
         android:textAppearance="?textAppearanceHeadline6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="200dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_iv"
         tools:text="@tools:sample/lorem" />
-
-    <ImageView
-        android:id="@+id/image_iv"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_tv"
-        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/published_at_tv"
@@ -45,7 +46,7 @@
         android:textAppearance="?textAppearanceBody1"
         app:layout_constraintEnd_toStartOf="@id/favorite_marked_iv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_iv"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
         tools:text="@tools:sample/date/ddmmyy" />
 
     <ImageView
@@ -59,7 +60,7 @@
         android:src="@drawable/ic_favorite_marked"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/favorite_unmarked_iv"
-        app:layout_constraintTop_toBottomOf="@id/image_iv" />
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
     <ImageView
         android:id="@+id/favorite_unmarked_iv"
@@ -71,7 +72,7 @@
         android:layout_marginBottom="6dp"
         android:src="@drawable/ic_favorite_unmarked"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_iv"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

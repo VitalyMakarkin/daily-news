@@ -29,7 +29,13 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_TEXT -> TextViewHolder(ItemTextArticleBinding.inflate(inflater, parent, false))
-            TYPE_IMAGE -> ImageViewHolder(ItemImageArticleBinding.inflate(inflater, parent, false))
+            TYPE_IMAGE -> ImageViewHolder(
+                ItemImageArticleBinding.inflate(
+                    inflater,
+                    parent,
+                    false
+                )
+            )
             else -> throw Exception("Not found view holder")
         }
     }
@@ -37,7 +43,10 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is TextViewHolder -> holder.bind(getItem(position) as TextArticleUI, itemHandler)
-            is ImageViewHolder -> holder.bind(getItem(position) as ImageArticleUI, itemHandler)
+            is ImageViewHolder -> holder.bind(
+                getItem(position) as ImageArticleUI,
+                itemHandler
+            )
         }
     }
 
@@ -66,18 +75,32 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
             binding.descriptionTv.text = article.description
             binding.publishedAtTv.text = article.publishedAt
 
+            if (article.isFavorite) {
+                setFavoriteMark(true)
+            } else {
+                setFavoriteMark(false)
+            }
+
             itemView.setOnClickListener { itemHandler.onItemClicked() }
 
             binding.favoriteMarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemMarked()
-                binding.favoriteMarkedIv.visibility = View.GONE
-                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
+                setFavoriteMark(false)
             }
 
             binding.favoriteUnmarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemMarked()
+                setFavoriteMark(true)
+            }
+        }
+
+        private fun setFavoriteMark(isMarked: Boolean) {
+            if (isMarked) {
                 binding.favoriteMarkedIv.visibility = View.VISIBLE
                 binding.favoriteUnmarkedIv.visibility = View.GONE
+            } else {
+                binding.favoriteMarkedIv.visibility = View.GONE
+                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
             }
         }
     }
@@ -93,17 +116,32 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
                 crossfade(true)
             }
 
+            if (article.isFavorite) {
+                setFavoriteMark(true)
+            } else {
+                setFavoriteMark(false)
+            }
+
             itemView.setOnClickListener { itemHandler.onItemClicked() }
+
             binding.favoriteMarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemMarked()
-                binding.favoriteMarkedIv.visibility = View.GONE
-                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
+                setFavoriteMark(false)
             }
 
             binding.favoriteUnmarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemMarked()
+                setFavoriteMark(true)
+            }
+        }
+
+        private fun setFavoriteMark(isMarked: Boolean) {
+            if (isMarked) {
                 binding.favoriteMarkedIv.visibility = View.VISIBLE
                 binding.favoriteUnmarkedIv.visibility = View.GONE
+            } else {
+                binding.favoriteMarkedIv.visibility = View.GONE
+                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
             }
         }
     }
