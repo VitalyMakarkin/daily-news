@@ -1,11 +1,12 @@
 package com.example.dailynews.ui.articles
 
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.dailynews.databinding.ItemImageArticleBinding
 import com.example.dailynews.databinding.ItemTextArticleBinding
 import com.example.shared.presentation.model.ArticleUI
@@ -75,7 +76,10 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
         fun bind(article: ImageArticleUI, itemHandler: ItemHandler) {
             binding.titleTv.text = article.title
             binding.publishedAtTv.text = article.publishedAt
-            binding.imageIv.setImageURI(article.urlToImage.toUri())
+            binding.imageIv.load(article.urlToImage) {
+                placeholder(ColorDrawable(0xEEEEEE))
+                crossfade(true)
+            }
 
             itemView.setOnClickListener { itemHandler.onItemClicked() }
 //            itemView.setOnClickListener { itemHandler.onFavoriteItemMarked() }
