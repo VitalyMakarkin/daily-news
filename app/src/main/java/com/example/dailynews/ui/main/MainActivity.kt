@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.mainBottomBnv
-
         if (savedInstanceState == null) {
             navigator.applyCommands(arrayOf<Command>(Replace(Articles())))
         }

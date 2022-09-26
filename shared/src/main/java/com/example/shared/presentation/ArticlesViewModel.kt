@@ -24,16 +24,9 @@ class ArticlesViewModel @Inject constructor(
         class Error(val throwable: Throwable) : UiStateView()
     }
 
-    sealed class Event {
-        class Error(val throwable: Throwable) : Event()
-    }
-
     private var _uiStateLiveData: MutableLiveData<UiStateView> =
         MutableLiveData(UiStateView.Loading)
     val uiStateLiveData: LiveData<UiStateView> get() = _uiStateLiveData
-
-    private var _eventLiveData: MutableLiveData<Event> = MutableLiveData()
-    val eventLiveData: LiveData<Event> get() = _eventLiveData
 
     init {
         refresh()
@@ -60,20 +53,12 @@ class ArticlesViewModel @Inject constructor(
         }
     }
 
-    fun resetEvent() {
-        _eventLiveData.value = null
-    }
-
-    fun eventText(text: String) {
-        _eventLiveData.value = Event.Error(Exception("test"))
-    }
-
     fun addArticleToFavorites(id: Int) {
         viewModelScope.launch {
             try {
                 articleInteractor.setArticleFavoriteState(id, true)
             } catch (error: Throwable) {
-                _eventLiveData.value = Event.Error(error)
+                // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
         }
@@ -84,7 +69,7 @@ class ArticlesViewModel @Inject constructor(
             try {
                 articleInteractor.setArticleFavoriteState(id, false)
             } catch (error: Throwable) {
-                _eventLiveData.value = Event.Error(error)
+                // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
         }
