@@ -3,14 +3,15 @@ package com.example.dailynews.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dailynews.R
-import com.example.dailynews.Screens.Articles
+import com.example.dailynews.Screens.toArticles
+import com.example.dailynews.Screens.toFavoriteArticles
+import com.example.dailynews.Screens.toSettings
 import com.example.dailynews.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Replace
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,12 +38,26 @@ class MainActivity : AppCompatActivity() {
         initViews()
 
         if (savedInstanceState == null) {
-            navigator.applyCommands(arrayOf<Command>(Replace(Articles())))
+            navigator.applyCommands(arrayOf<Command>(Replace(toArticles())))
         }
     }
 
     private fun initViews() {
-//        binding.bottomNav.addView()
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.articles_item -> {
+                    navigator.applyCommands(arrayOf<Command>(Replace(toArticles())))
+                }
+                R.id.favorite_articles_item -> {
+                    navigator.applyCommands(arrayOf<Command>(Replace(toFavoriteArticles())))
+                }
+                R.id.settings_item -> {
+                    navigator.applyCommands(arrayOf<Command>(Replace(toSettings())))
+                }
+            }
+
+            return@setOnItemSelectedListener true
+        }
     }
 
     override fun onResumeFragments() {
