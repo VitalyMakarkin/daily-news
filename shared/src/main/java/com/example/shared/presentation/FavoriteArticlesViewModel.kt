@@ -57,9 +57,8 @@ class FavoriteArticlesViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 articleInteractor.setArticleFavoriteState(id, false)
-                // TODO: Update ui state as Success
             } catch (error: Throwable) {
-                // TODO: Update ui state as Error (example: Toast)
+                // TODO: Pass event to show toast in activity/fragment
             }
         }
     }
