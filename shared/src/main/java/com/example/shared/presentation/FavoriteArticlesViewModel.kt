@@ -26,7 +26,7 @@ class FavoriteArticlesViewModel @Inject constructor(
 
     private var _uiStateLiveData: MutableLiveData<UiStateView> =
         MutableLiveData(UiStateView.Loading)
-    val uiStateView: LiveData<UiStateView> get() = _uiStateLiveData
+    val uiStateLiveData: LiveData<UiStateView> get() = _uiStateLiveData
 
     init {
         refresh()

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dailynews.databinding.FragmentArticlesBinding
+import com.example.dailynews.ui.shared.ArticlesAdapter
 import com.example.shared.presentation.ArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

@@ -1,4 +1,4 @@
-package com.example.dailynews.ui.articles
+package com.example.dailynews.ui.shared
 
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
