@@ -40,13 +40,21 @@ class SettingsViewModel @Inject constructor(
             _uiStateLiveData.value = UiStateView.Loading
 
             // TODO: Define articlesCount from articlesInteractor
-            val articlesCount = 0
+            var articlesCount = 0
+            articlesInteractor.getArticles(preferred_cache = true)
+                .onSuccess { articlesCount = it.size }
 
             // TODO: Define cachedArticlesCount from articlesInteractor
-            val cachedArticlesCount = 0
+            var cachedArticlesCount = 0
+            articlesInteractor.getArticles(preferred_cache = true)
+                .onSuccess {
+                    cachedArticlesCount = it.filter { article -> !article.isFavorite }.size
+                }
 
             // TODO: Define favoriteArticlesCount from articlesInteractor
-            val favoriteArticlesCount = 0
+            var favoriteArticlesCount = 0
+            articlesInteractor.getFavoriteArticles()
+                .onSuccess { favoriteArticlesCount = it.size }
 
             try {
                 _uiStateLiveData.value = UiStateView.Loading
