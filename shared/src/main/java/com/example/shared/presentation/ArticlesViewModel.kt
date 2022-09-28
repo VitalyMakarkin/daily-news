@@ -39,7 +39,8 @@ class ArticlesViewModel @Inject constructor(
             try {
                 articleInteractor.getArticles(preferred_cache = false)
                     .onSuccess { articles ->
-                        val articlesUI = articles.map { it.mapToUI() }
+                        val sortedArticles = articles.sortedByDescending { it.publishedAt }
+                        val articlesUI = sortedArticles.map { it.mapToUI() }
                         _uiStateLiveData.value = UiStateView.Data(articlesUI)
                     }
                     .onFailure {

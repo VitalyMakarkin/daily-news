@@ -39,7 +39,8 @@ class FavoriteArticlesViewModel @Inject constructor(
             try {
                 articleInteractor.getFavoriteArticles()
                     .onSuccess { articles ->
-                        val articlesUI = articles.map { it.mapToUI() }
+                        val sortedArticles = articles.sortedByDescending { it.favoritesAt }
+                        val articlesUI = sortedArticles.map { it.mapToUI() }
                         _uiStateLiveData.value = UiStateView.Data(articlesUI)
                     }
                     .onFailure {
