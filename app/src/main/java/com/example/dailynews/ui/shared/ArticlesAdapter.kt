@@ -76,10 +76,14 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
             binding.descriptionTv.text = article.description
             binding.publishedAtTv.text = article.publishedAt
 
-            if (article.isFavorite) {
-                setFavoriteMark(true)
-            } else {
-                setFavoriteMark(false)
+            binding.favoriteMarkedIv.visibility = when (article.isFavorite) {
+                true -> View.VISIBLE
+                else -> View.GONE
+            }
+
+            binding.favoriteUnmarkedIv.visibility = when (article.isFavorite) {
+                true -> View.GONE
+                else -> View.VISIBLE
             }
 
             itemView.setOnClickListener {
@@ -88,22 +92,10 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
 
             binding.favoriteMarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemUnmarked(article.id)
-                setFavoriteMark(false)
             }
 
             binding.favoriteUnmarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemMarked(article.id)
-                setFavoriteMark(true)
-            }
-        }
-
-        private fun setFavoriteMark(isMarked: Boolean) {
-            if (isMarked) {
-                binding.favoriteMarkedIv.visibility = View.VISIBLE
-                binding.favoriteUnmarkedIv.visibility = View.GONE
-            } else {
-                binding.favoriteMarkedIv.visibility = View.GONE
-                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
             }
         }
     }
@@ -119,10 +111,14 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
                 crossfade(true)
             }
 
-            if (article.isFavorite) {
-                setFavoriteMark(true)
-            } else {
-                setFavoriteMark(false)
+            binding.favoriteMarkedIv.visibility = when (article.isFavorite) {
+                true -> View.VISIBLE
+                else -> View.GONE
+            }
+
+            binding.favoriteUnmarkedIv.visibility = when (article.isFavorite) {
+                true -> View.GONE
+                else -> View.VISIBLE
             }
 
             itemView.setOnClickListener {
@@ -131,22 +127,10 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
 
             binding.favoriteMarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemUnmarked(article.id)
-                setFavoriteMark(false)
             }
 
             binding.favoriteUnmarkedIv.setOnClickListener {
                 itemHandler.onFavoriteItemMarked(article.id)
-                setFavoriteMark(true)
-            }
-        }
-
-        private fun setFavoriteMark(isMarked: Boolean) {
-            if (isMarked) {
-                binding.favoriteMarkedIv.visibility = View.VISIBLE
-                binding.favoriteUnmarkedIv.visibility = View.GONE
-            } else {
-                binding.favoriteMarkedIv.visibility = View.GONE
-                binding.favoriteUnmarkedIv.visibility = View.VISIBLE
             }
         }
     }

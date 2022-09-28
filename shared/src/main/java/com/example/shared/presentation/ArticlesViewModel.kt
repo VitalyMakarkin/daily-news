@@ -62,7 +62,7 @@ class ArticlesViewModel @Inject constructor(
                 // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
-        }
+        }.invokeOnCompletion { refresh() }
     }
 
     fun removeArticleFromFavorites(id: Int) {
@@ -73,6 +73,6 @@ class ArticlesViewModel @Inject constructor(
                 // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
-        }
+        }.invokeOnCompletion { refresh() }
     }
 }

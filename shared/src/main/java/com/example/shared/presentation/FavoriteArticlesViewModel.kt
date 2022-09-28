@@ -61,6 +61,6 @@ class FavoriteArticlesViewModel @Inject constructor(
             } catch (error: Throwable) {
                 // TODO: Pass event to show toast in activity/fragment
             }
-        }
+        }.invokeOnCompletion { refresh() }
     }
 }
