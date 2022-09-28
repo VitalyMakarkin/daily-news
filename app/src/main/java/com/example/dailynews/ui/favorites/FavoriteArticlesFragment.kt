@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dailynews.databinding.FragmentArticlesBinding
 import com.example.dailynews.databinding.FragmentFavoriteArticlesBinding
 import com.example.dailynews.ui.shared.ArticlesAdapter
-import com.example.shared.presentation.ArticlesViewModel
 import com.example.shared.presentation.FavoriteArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -58,7 +56,7 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
     }
 
     override fun onFavoriteItemMarked(articleId: Int) {
-        Timber.e("Not implemented")
+        Timber.d("Not implemented")
     }
 
     override fun onFavoriteItemUnmarked(articleId: Int) {
@@ -66,7 +64,8 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
     }
 
     private fun render(uiStateView: FavoriteArticlesViewModel.UiStateView) {
-        binding.progressIndicator.isVisible = uiStateView is FavoriteArticlesViewModel.UiStateView.Loading
+        binding.progressIndicator.isVisible =
+            uiStateView is FavoriteArticlesViewModel.UiStateView.Loading
         binding.articlesRv.isVisible = uiStateView is FavoriteArticlesViewModel.UiStateView.Data
         binding.errorsLayout.isVisible = uiStateView is FavoriteArticlesViewModel.UiStateView.Error
 

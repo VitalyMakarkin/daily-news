@@ -33,25 +33,33 @@ class SettingsFragment : Fragment() {
                 is SettingsViewModel.UiStateView.Loading -> {
                     binding.cachedCountTv.text = "-"
                     binding.favoritesCountTv.text = "-"
+                    binding.totalCountTv.text = "-"
                 }
                 is SettingsViewModel.UiStateView.Data -> {
                     binding.cachedCountTv.text = uiStateView.cachedArticlesCount.toString()
                     binding.favoritesCountTv.text = uiStateView.favoriteArticlesCount.toString()
+                    binding.totalCountTv.text = uiStateView.articlesCount.toString()
                 }
                 is SettingsViewModel.UiStateView.Error -> {
                     binding.cachedCountTv.text = "Error"
                     binding.favoritesCountTv.text = "Error"
+                    binding.totalCountTv.text = "Error"
                 }
             }
         }
 
         binding.cachedCountLayout.setOnLongClickListener {
-            viewModel.removeCachedArticles()
+            viewModel.removeCachedNotFavoriteArticles()
             true
         }
 
         binding.favoritesCountLayout.setOnLongClickListener {
             viewModel.removeFavoriteArticles()
+            true
+        }
+
+        binding.totalCountLayout.setOnLongClickListener {
+            viewModel.removeAllArticles()
             true
         }
     }

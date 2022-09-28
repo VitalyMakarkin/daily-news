@@ -35,7 +35,6 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun refresh() {
-
         viewModelScope.launch {
             _uiStateLiveData.value = UiStateView.Loading
 
@@ -72,17 +71,67 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun removeCachedArticles() {
+    fun removeAllArticles() {
         viewModelScope.launch {
-            articlesInteractor.removeCachedArticles()
+            articlesInteractor.getArticles(preferred_cache = true)
+                .onSuccess { articles ->
+                    // TODO: Show progress bar with counter
+                    Timber.d("${articles.size} articles ready to be deleted")
+                    articles.map { article ->
+                        try {
+                            articlesInteractor.removeArticleFromCache(article.id)
+                            // TODO: Update progress counter
+                            Timber.d("Article ${article.id} has been removed")
+                        } catch (error: Exception) {
+                            Timber.e("Article ${article.id} has not been removed!")
+                        }
+                    }
+                }
+        }.invokeOnCompletion {
             // TODO: Show success as Toast
+            refresh()
+        }
+    }
+
+    fun removeCachedNotFavoriteArticles() {
+        viewModelScope.launch {
+            articlesInteractor.getNotFavoriteArticles()
+                .onSuccess { articles ->
+                    Timber.d("${articles.size} cached (not favorite) articles ready to be deleted")
+                    articles.map { article ->
+                        try {
+                            articlesInteractor.removeArticleFromCache(article.id)
+                            // TODO: Update progress counter
+                            Timber.d("Cached article ${article.id} has been removed")
+                        } catch (error: Exception) {
+                            Timber.e("Cached article ${article.id} has not been removed!")
+                        }
+                    }
+                }
+        }.invokeOnCompletion {
+            // TODO: Show success as Toast
+            refresh()
         }
     }
 
     fun removeFavoriteArticles() {
         viewModelScope.launch {
-            articlesInteractor.removeFavoriteArticles()
+            articlesInteractor.getFavoriteArticles()
+                .onSuccess { articles ->
+                    Timber.d("${articles.size} articles ready to be removed from favorites")
+                    articles.map { article ->
+                        try {
+                            articlesInteractor.setArticleFavoriteState(article.id, false)
+                            // TODO: Update progress counter
+                            Timber.d("Favorite article ${article.id} has been removed")
+                        } catch (error: Exception) {
+                            Timber.e("Favorite article ${article.id} has not been removed!")
+                        }
+                    }
+                }
+        }.invokeOnCompletion {
             // TODO: Show success as Toast
+            refresh()
         }
     }
 }

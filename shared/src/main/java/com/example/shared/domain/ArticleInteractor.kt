@@ -4,7 +4,6 @@ import com.example.shared.data.repository.ArticlesRepository
 import com.example.shared.domain.model.Article
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -23,29 +22,18 @@ class ArticleInteractor @Inject constructor(
             }
     }
 
+    suspend fun getNotFavoriteArticles(): Result<List<Article>> {
+        return articlesRepository.getArticles(preferred_cache = true)
+            .map { articlesList ->
+                articlesList.filter { !it.isFavorite }
+            }
+    }
+
     suspend fun setArticleFavoriteState(id: Int, isFavorite: Boolean) {
         return articlesRepository.setArticleFavoriteState(id, isFavorite)
     }
 
-    suspend fun removeCachedArticles() {
-        return withContext(backgroundDispatcher) {
-            articlesRepository.getArticles(preferred_cache = true)
-                .map { articlesList ->
-                    articlesList
-                        .filter { !it.isFavorite }
-                        .map { articlesRepository.removeArticle(it.id) }
-                }
-        }
-    }
-
-    suspend fun removeFavoriteArticles() {
-        return withContext(backgroundDispatcher) {
-            articlesRepository.getArticles(preferred_cache = true)
-                .map { articlesList ->
-                    articlesList
-                        .filter { it.isFavorite }
-                        .map { articlesRepository.setArticleFavoriteState(it.id, false) }
-                }
-        }
+    suspend fun removeArticleFromCache(id: Int) {
+        return articlesRepository.removeArticle(id)
     }
 }

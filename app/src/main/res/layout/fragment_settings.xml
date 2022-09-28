@@ -8,6 +8,48 @@
     tools:context=".ui.settings.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/total_count_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/total_count_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total articles:"
+
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/total_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="0"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintStart_toEndOf="@id/total_count_title_tv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Long press to clear"
+            android:textAppearance="?textAppearanceCaption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total_count_title_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cached_count_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +60,7 @@
             android:id="@+id/cached_count_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cached articles:"
+            android:text="Cached (not favorite) articles:"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long press to clear list"
+            android:text="Long press to clear"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cached_count_title_tv" />
@@ -79,7 +121,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long press to clear list"
+            android:text="Long press to clear"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/favorites_count_title_tv" />
@@ -89,6 +131,5 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 
 </LinearLayout>
