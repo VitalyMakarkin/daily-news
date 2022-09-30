@@ -30,13 +30,7 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_TEXT -> TextViewHolder(ItemTextArticleBinding.inflate(inflater, parent, false))
-            TYPE_IMAGE -> ImageViewHolder(
-                ItemImageArticleBinding.inflate(
-                    inflater,
-                    parent,
-                    false
-                )
-            )
+            TYPE_IMAGE -> ImageViewHolder(ItemImageArticleBinding.inflate(inflater, parent, false))
             else -> throw Exception("Not found view holder")
         }
     }
@@ -44,10 +38,7 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is TextViewHolder -> holder.bind(getItem(position) as TextArticleUI, itemHandler)
-            is ImageViewHolder -> holder.bind(
-                getItem(position) as ImageArticleUI,
-                itemHandler
-            )
+            is ImageViewHolder -> holder.bind(getItem(position) as ImageArticleUI, itemHandler)
         }
     }
 
