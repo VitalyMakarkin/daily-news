@@ -47,11 +47,12 @@ class ArticlesRepository @Inject constructor(
         }
     }
 
-    suspend fun getArticleById(id: Int) {
+    suspend fun getArticleById(id: Int): Result<Article> {
         return withContext(backgroundDispatcher) {
             try {
                 val articleDB = articlesDao.getArticleById(id)
-                Result.success(articleDB)
+                val article = articleDB.mapToDomain()
+                Result.success(article)
             } catch (error: Throwable) {
                 Result.failure(NotImplementedError())
             }

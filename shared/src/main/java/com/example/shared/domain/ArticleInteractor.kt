@@ -15,6 +15,10 @@ class ArticleInteractor @Inject constructor(
         return articlesRepository.getArticles(preferred_cache)
     }
 
+    suspend fun getArticle(id: Int): Result<Article> {
+        return articlesRepository.getArticleById(id)
+    }
+
     suspend fun getFavoriteArticles(): Result<List<Article>> {
         return articlesRepository.getArticles(preferred_cache = true)
             .map { articlesList ->

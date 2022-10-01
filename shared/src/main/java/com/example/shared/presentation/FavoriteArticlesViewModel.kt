@@ -15,8 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteArticlesViewModel @Inject constructor(
     private val articleInteractor: ArticleInteractor
-) :
-    ViewModel() {
+) : ViewModel() {
 
     sealed class UiStateView {
         data class Data(val favoriteArticles: List<BaseArticleUI>) : UiStateView()
@@ -37,16 +36,14 @@ class FavoriteArticlesViewModel @Inject constructor(
             _uiStateLiveData.value = UiStateView.Loading
 
             try {
-                articleInteractor.getFavoriteArticles()
-                    .onSuccess { articles ->
-                        val sortedArticles = articles.sortedByDescending { it.favoritesAt }
-                        val articlesUI = sortedArticles.map { it.mapToUI() }
-                        _uiStateLiveData.value = UiStateView.Data(articlesUI)
-                    }
-                    .onFailure {
-                        _uiStateLiveData.value = UiStateView.Error(it)
-                        Timber.w(it)
-                    }
+                articleInteractor.getFavoriteArticles().onSuccess { articles ->
+                    val sortedArticles = articles.sortedByDescending { it.favoritesAt }
+                    val articlesUI = sortedArticles.map { it.mapToUI() }
+                    _uiStateLiveData.value = UiStateView.Data(articlesUI)
+                }.onFailure {
+                    _uiStateLiveData.value = UiStateView.Error(it)
+                    Timber.w(it)
+                }
             } catch (error: Throwable) {
                 _uiStateLiveData.value = UiStateView.Error(error)
                 Timber.w(error)
@@ -59,9 +56,25 @@ class FavoriteArticlesViewModel @Inject constructor(
             try {
                 articleInteractor.setArticleFavoriteState(id, false)
             } catch (error: Throwable) {
-                // TODO: Pass event to show toast in activity/fragment
+                Timber.w(error)
+            }
+        }.invokeOnCompletion { removeArticleFromList(id) }
+    }
+
+    private fun removeArticleFromList(id: Int) {
+        viewModelScope.launch {
+            try {
+                if (uiStateLiveData.value is UiStateView.Data) {
+                    articleInteractor.getArticle(id).onSuccess { updatedArticle ->
+                        val updatedArticleUI = updatedArticle.mapToUI()
+                        val articles = (uiStateLiveData.value as UiStateView.Data).favoriteArticles
+                            .filter { it.id != updatedArticleUI.id }
+                        _uiStateLiveData.value = UiStateView.Data(articles)
+                    }
+                }
+            } catch (error: Throwable) {
+                Timber.w(error)
             }
         }
-        // TODO: refresh only updated item in favoriteArticles (uiStateView.Data)
     }
 }

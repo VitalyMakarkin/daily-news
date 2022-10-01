@@ -59,11 +59,9 @@ class ArticlesViewModel @Inject constructor(
             try {
                 articleInteractor.setArticleFavoriteState(id, true)
             } catch (error: Throwable) {
-                // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
-        }
-        // TODO: refresh only updated item in articles (uiStateView.Data)
+        }.invokeOnCompletion { updateArticleFromList(id) }
     }
 
     fun removeArticleFromFavorites(id: Int) {
@@ -71,10 +69,25 @@ class ArticlesViewModel @Inject constructor(
             try {
                 articleInteractor.setArticleFavoriteState(id, false)
             } catch (error: Throwable) {
-                // TODO: Pass event to show toast in activity/fragment
+                Timber.w(error)
+            }
+        }.invokeOnCompletion { updateArticleFromList(id) }
+    }
+
+    private fun updateArticleFromList(id: Int) {
+        viewModelScope.launch {
+            try {
+                if (uiStateLiveData.value is UiStateView.Data) {
+                    articleInteractor.getArticle(id).onSuccess { updatedArticle ->
+                        val updatedArticleUI = updatedArticle.mapToUI()
+                        val articles = (uiStateLiveData.value as UiStateView.Data).articles
+                            .map { if (it.id == updatedArticleUI.id) updatedArticleUI else it }
+                        _uiStateLiveData.value = UiStateView.Data(articles)
+                    }
+                }
+            } catch (error: Throwable) {
                 Timber.w(error)
             }
         }
-        // TODO: refresh only updated item in articles (uiStateView.Data)
     }
 }
