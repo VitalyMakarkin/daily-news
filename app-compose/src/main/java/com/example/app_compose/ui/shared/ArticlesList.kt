@@ -1,4 +1,4 @@
-package com.example.app_compose.ui.articles
+package com.example.app_compose.ui.shared
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items

@@ -1,4 +1,4 @@
-package com.example.app_compose.ui.articles
+package com.example.app_compose.ui.shared
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
