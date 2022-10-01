@@ -16,13 +16,19 @@ fun ArticlesScreen(
 
     when (val uiState = state.value) {
         is ArticlesViewModel.UiStateView.Data -> {
-
+            ArticlesList(
+                modifier = modifier,
+                articles = uiState.articles
+            )
         }
         is ArticlesViewModel.UiStateView.Error -> {
-
+            ErrorScreen(
+                modifier = modifier,
+                message = uiState.throwable.message ?: "Error!"
+            ) { viewModel.refresh() }
         }
         is ArticlesViewModel.UiStateView.Loading -> {
-
+            LoadingScreen(modifier = modifier)
         }
         else -> {} // throw Exception("Not implemented state")
     }

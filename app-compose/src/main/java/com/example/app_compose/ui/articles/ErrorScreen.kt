@@ -6,7 +6,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ErrorScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    message: String,
+    refresh: () -> Unit
 ) {
     // TODO: Implement
 }
@@ -14,5 +16,7 @@ fun ErrorScreen(
 @Preview(showBackground = true)
 @Composable
 fun ErrorScreenPreview() {
-    ErrorScreen()
+    ErrorScreen(message = "Error!") {
+        // TODO: Implement action
+    }
 }

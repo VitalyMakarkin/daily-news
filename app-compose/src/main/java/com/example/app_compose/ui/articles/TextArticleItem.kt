@@ -1,27 +1,28 @@
 package com.example.app_compose.ui.articles
 
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.shared.presentation.model.ImageArticleUI
+import com.example.shared.presentation.model.TextArticleUI
 
 @Composable
-fun ImageArticle(
+fun TextArticleItem(
     modifier: Modifier = Modifier,
-    articleUI: ImageArticleUI
+    article: TextArticleUI
 ) {
-    // TODO: Implement
+    Text(modifier = modifier, text = article.title)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ImageArticlePreview() {
-    ImageArticle(
-        articleUI = ImageArticleUI(
+fun TextArticleItemPreview() {
+    TextArticleItem(
+        article = TextArticleUI(
             id = 1,
             title = "Title",
+            description = "Description",
             publishedAt = "01-01-2022",
-            urlToImage = "url",
             isFavorite = true
         )
     )
