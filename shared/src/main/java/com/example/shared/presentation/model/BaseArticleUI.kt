@@ -1,6 +1,6 @@
 package com.example.shared.presentation.model
 
-sealed class ArticleUI(
+sealed class BaseArticleUI(
     open val id: Int
 )
 

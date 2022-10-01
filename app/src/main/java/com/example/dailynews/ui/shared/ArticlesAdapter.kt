@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.dailynews.databinding.ItemImageArticleBinding
 import com.example.dailynews.databinding.ItemTextArticleBinding
-import com.example.shared.presentation.model.ArticleUI
+import com.example.shared.presentation.model.BaseArticleUI
 import com.example.shared.presentation.model.ImageArticleUI
 import com.example.shared.presentation.model.TextArticleUI
 
@@ -18,7 +18,7 @@ const val TYPE_TEXT = 0
 const val TYPE_IMAGE = 1
 
 class ArticlesAdapter(private val itemHandler: ItemHandler) :
-    ListAdapter<ArticleUI, RecyclerView.ViewHolder>(ArticlesDiffUtilsItemCallback) {
+    ListAdapter<BaseArticleUI, RecyclerView.ViewHolder>(ArticlesDiffUtilsItemCallback) {
 
     interface ItemHandler {
         fun onItemClicked(articleId: Int)
@@ -49,12 +49,12 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
         }
     }
 
-    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<ArticleUI>() {
-        override fun areItemsTheSame(oldItem: ArticleUI, newItem: ArticleUI): Boolean {
+    object ArticlesDiffUtilsItemCallback : DiffUtil.ItemCallback<BaseArticleUI>() {
+        override fun areItemsTheSame(oldItem: BaseArticleUI, newItem: BaseArticleUI): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: ArticleUI, newItem: ArticleUI): Boolean {
+        override fun areContentsTheSame(oldItem: BaseArticleUI, newItem: BaseArticleUI): Boolean {
             return oldItem == newItem
         }
     }

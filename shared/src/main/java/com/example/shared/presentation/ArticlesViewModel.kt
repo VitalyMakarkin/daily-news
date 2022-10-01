@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shared.domain.ArticleInteractor
-import com.example.shared.presentation.model.ArticleUI
+import com.example.shared.presentation.model.BaseArticleUI
 import com.example.shared.presentation.model.mapToUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ class ArticlesViewModel @Inject constructor(
     ViewModel() {
 
     sealed class UiStateView {
-        data class Data(val articles: List<ArticleUI>) : UiStateView()
+        data class Data(val articles: List<BaseArticleUI>) : UiStateView()
         object Loading : UiStateView()
         class Error(val throwable: Throwable) : UiStateView()
     }
@@ -62,7 +62,8 @@ class ArticlesViewModel @Inject constructor(
                 // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
-        }.invokeOnCompletion { refresh() }
+        }
+        // TODO: refresh only updated item in articles (uiStateView.Data)
     }
 
     fun removeArticleFromFavorites(id: Int) {
@@ -73,6 +74,7 @@ class ArticlesViewModel @Inject constructor(
                 // TODO: Pass event to show toast in activity/fragment
                 Timber.w(error)
             }
-        }.invokeOnCompletion { refresh() }
+        }
+        // TODO: refresh only updated item in articles (uiStateView.Data)
     }
 }

@@ -2,7 +2,7 @@ package com.example.shared.presentation.model
 
 import com.example.shared.domain.model.Article
 
-fun Article.mapToUI(): ArticleUI {
+fun Article.mapToUI(): BaseArticleUI {
     return when {
         this.urlToImage.isNotEmpty() -> ImageArticleUI(
             id = this.id,

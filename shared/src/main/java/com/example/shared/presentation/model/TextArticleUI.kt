@@ -6,4 +6,4 @@ data class TextArticleUI(
     val description: String,
     val publishedAt: String,
     val isFavorite: Boolean
-) : ArticleUI(id)
+) : BaseArticleUI(id)

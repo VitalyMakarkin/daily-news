@@ -6,4 +6,4 @@ data class ImageArticleUI(
     val publishedAt: String,
     val urlToImage: String,
     val isFavorite: Boolean
-) : ArticleUI(id)
+) : BaseArticleUI(id)
