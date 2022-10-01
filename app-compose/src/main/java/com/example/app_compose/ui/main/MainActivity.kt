@@ -19,12 +19,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DailynewsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    DailyNews()
                 }
             }
         }
@@ -32,14 +31,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun DailyNews() {
+    Text(text = "")
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DailyNewsPreview() {
     DailynewsTheme {
-        Greeting("Android")
+        DailyNews()
     }
 }
