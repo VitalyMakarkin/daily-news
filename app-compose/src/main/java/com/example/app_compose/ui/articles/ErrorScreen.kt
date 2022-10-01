@@ -6,8 +6,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ErrorScreen(
-    modifier: Modifier = Modifier,
     message: String,
+    modifier: Modifier = Modifier,
     refresh: () -> Unit
 ) {
     // TODO: Implement

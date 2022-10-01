@@ -11,22 +11,22 @@ import com.example.shared.presentation.model.TextArticleUI
 
 @Composable
 fun TextArticleItem(
-    modifier: Modifier = Modifier,
-    article: TextArticleUI
+    article: TextArticleUI,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .padding(top = 6.dp, bottom = 6.dp)
     ) {
         Text(
+            text = article.title,
             modifier = modifier
-                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp),
-            text = article.title
+                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp)
         )
         Text(
+            text = article.publishedAt,
             modifier = modifier
-                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp),
-            text = article.publishedAt
+                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp)
         )
     }
 }

@@ -18,14 +18,14 @@ fun ArticlesScreen(
     when (val uiState = state.value) {
         is ArticlesViewModel.UiStateView.Data -> {
             ArticlesList(
-                modifier = modifier,
-                articles = uiState.articles
+                articles = uiState.articles,
+                modifier = modifier
             )
         }
         is ArticlesViewModel.UiStateView.Error -> {
             ErrorScreen(
-                modifier = modifier,
-                message = uiState.throwable.message ?: "Error!"
+                message = uiState.throwable.message ?: "Error!",
+                modifier = modifier
             ) { viewModel.refresh() }
         }
         is ArticlesViewModel.UiStateView.Loading -> {

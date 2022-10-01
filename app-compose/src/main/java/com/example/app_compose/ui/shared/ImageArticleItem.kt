@@ -14,30 +14,30 @@ import com.example.shared.presentation.model.ImageArticleUI
 
 @Composable
 fun ImageArticleItem(
-    modifier: Modifier = Modifier,
-    article: ImageArticleUI
+    article: ImageArticleUI,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .padding(top = 6.dp, bottom = 6.dp)
     ) {
         AsyncImage(
+            model = article.urlToImage,
+            contentDescription = "Image description",
             modifier = modifier
                 .height(200.dp)
                 .padding(top = 6.dp, bottom = 6.dp),
-            model = article.urlToImage,
-            contentDescription = "Image description",
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Crop
         )
         Text(
+            text = article.title,
             modifier = modifier
-                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp),
-            text = article.title
+                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp)
         )
         Text(
+            text = article.publishedAt,
             modifier = modifier
-                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp),
-            text = article.publishedAt
+                .padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 6.dp)
         )
     }
 }

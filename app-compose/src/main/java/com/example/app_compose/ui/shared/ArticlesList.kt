@@ -11,19 +11,19 @@ import com.example.shared.presentation.model.TextArticleUI
 
 @Composable
 fun ArticlesList(
-    modifier: Modifier = Modifier,
-    articles: List<BaseArticleUI>
+    articles: List<BaseArticleUI>,
+    modifier: Modifier = Modifier
 ) {
     LazyColumn {
         items(articles) { article ->
             when (article) {
                 is TextArticleUI -> TextArticleItem(
-                    modifier = modifier,
-                    article = article
+                    article = article,
+                    modifier = modifier
                 )
                 is ImageArticleUI -> ImageArticleItem(
-                    modifier = modifier,
-                    article = article
+                    article = article,
+                    modifier = modifier
                 )
             }
         }
