@@ -12,13 +12,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.app_compose.ui.articles.ArticlesScreen
 import com.example.app_compose.ui.favorites.FavoriteArticlesScreen
@@ -52,6 +55,8 @@ fun DailyNews(
         BottomNavigation(
             backgroundColor = Color.White
         ) {
+            val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+            val currentDestination = navBackStackEntry?.destination
             BottomNavigationItem(
                 icon = {
                     Icon(
@@ -59,7 +64,7 @@ fun DailyNews(
                         contentDescription = null
                     )
                 },
-                selected = false,
+                selected = currentDestination?.hierarchy?.any { it.route == "articles" } == true,
                 onClick = { navHostController.navigate("articles") }
             )
             BottomNavigationItem(
@@ -69,7 +74,7 @@ fun DailyNews(
                         contentDescription = null
                     )
                 },
-                selected = false,
+                selected = currentDestination?.hierarchy?.any { it.route == "favorite_articles" } == true,
                 onClick = { navHostController.navigate("favorite_articles") }
             )
             BottomNavigationItem(
@@ -79,7 +84,7 @@ fun DailyNews(
                         contentDescription = null
                     )
                 },
-                selected = false,
+                selected = currentDestination?.hierarchy?.any { it.route == "settings" } == true,
                 onClick = { navHostController.navigate("settings") })
         }
     }) {
