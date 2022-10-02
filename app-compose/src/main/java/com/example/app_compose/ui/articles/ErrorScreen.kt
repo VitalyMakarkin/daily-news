@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,7 +33,11 @@ fun ErrorScreen(
             textAlign = TextAlign.Center
         )
         Button(onClick = refresh) {
-            Text(text = "Refresh")
+            Text(
+                text = stringResource(
+                    id = com.example.shared.R.string.articles_refresh_btn
+                )
+            )
         }
     }
 }
