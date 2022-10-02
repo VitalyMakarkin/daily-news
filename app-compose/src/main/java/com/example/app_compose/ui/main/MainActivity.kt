@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -91,6 +92,7 @@ fun DailyNews(
         NavHost(
             navController = navHostController,
             startDestination = "articles",
+            modifier = Modifier.padding(it)
         ) {
             composable("articles") {
                 ArticlesScreen()
