@@ -60,7 +60,7 @@ fun ImageArticleItem(
             if (article.isFavorite)
                 Image(
                     painter = painterResource(
-                        id = com.example.app_compose.R.drawable.ic_favorite_marked
+                        id = com.example.shared.R.drawable.ic_favorite_marked
                     ),
                     contentDescription = null,
                     modifier = modifier
@@ -72,7 +72,7 @@ fun ImageArticleItem(
             else
                 Image(
                     painter = painterResource(
-                        id = com.example.app_compose.R.drawable.ic_favorite_unmarked
+                        id = com.example.shared.R.drawable.ic_favorite_unmarked
                     ),
                     contentDescription = null,
                     modifier = modifier

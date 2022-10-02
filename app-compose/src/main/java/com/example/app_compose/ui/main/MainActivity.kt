@@ -61,7 +61,7 @@ fun DailyNews(
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painter = painterResource(id = com.example.app_compose.R.drawable.ic_articles_list),
+                        painter = painterResource(id = com.example.shared.R.drawable.ic_articles_list),
                         contentDescription = null
                     )
                 },
@@ -71,7 +71,7 @@ fun DailyNews(
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painter = painterResource(id = com.example.app_compose.R.drawable.ic_favorite_articles_list),
+                        painter = painterResource(id = com.example.shared.R.drawable.ic_favorite_articles_list),
                         contentDescription = null
                     )
                 },
@@ -81,7 +81,7 @@ fun DailyNews(
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painter = painterResource(id = com.example.app_compose.R.drawable.ic_settings),
+                        painter = painterResource(id = com.example.shared.R.drawable.ic_settings),
                         contentDescription = null
                     )
                 },
