@@ -46,6 +46,7 @@ class ArticlesAdapter(private val itemHandler: ItemHandler) :
         return when (getItem(position)) {
             is TextArticleUI -> TYPE_TEXT
             is ImageArticleUI -> TYPE_IMAGE
+            else -> throw Exception("View type not implemented")
         }
     }
 

@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shared.domain.ArticleInteractor
-import com.example.shared.presentation.model.BaseArticleUI
-import com.example.shared.presentation.model.mapToUI
+import com.example.shared.presentation.model.ArticleDetailsUI
+import com.example.shared.presentation.model.mapToDetailsUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -28,7 +28,7 @@ class ArticleViewModel @Inject constructor(
     }
 
     sealed class UiStateView {
-        data class Data(val article: BaseArticleUI) : UiStateView()
+        data class Data(val article: ArticleDetailsUI) : UiStateView()
         class Error(val throwable: Throwable) : UiStateView()
         object Loading : UiStateView()
     }
@@ -48,7 +48,7 @@ class ArticleViewModel @Inject constructor(
                 val result = articleInteractor.getArticle(articleId)
                 result
                     .onSuccess {
-                        val article = it.mapToUI()
+                        val article = it.mapToDetailsUI()
                         _uiStateLiveData.value = UiStateView.Data(article)
                     }
                     .onFailure {

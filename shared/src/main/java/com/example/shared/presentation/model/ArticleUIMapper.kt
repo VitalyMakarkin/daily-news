@@ -31,3 +31,15 @@ fun Article.mapToUI(): BaseArticleUI {
         )
     }
 }
+
+fun Article.mapToDetailsUI(): ArticleDetailsUI {
+    return ArticleDetailsUI(
+        id = this.id,
+        title = this.title,
+        author = this.author,
+        publishedAt = datetimeMapper(this.publishedAt),
+        description = this.description,
+        urlToImage = this.urlToImage,
+        isFavorite = this.isFavorite
+    )
+}

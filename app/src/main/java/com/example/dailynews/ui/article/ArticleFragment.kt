@@ -49,8 +49,9 @@ class ArticleFragment : Fragment() {
             viewModel.refresh()
         }
 
-        viewModel.uiStateLiveData
-            .observe(viewLifecycleOwner) { render(it) }
+        viewModel.uiStateLiveData.observe(viewLifecycleOwner) {
+            render(it)
+        }
     }
 
     private fun render(uiStateView: ArticleViewModel.UiStateView) {
@@ -61,11 +62,11 @@ class ArticleFragment : Fragment() {
         when (uiStateView) {
             is ArticleViewModel.UiStateView.Data -> {
                 val article = uiStateView.article
-                binding.articleTitleTv.text = article.id.toString()
-                binding.articleAuthorTv.text = article.id.toString()
-                binding.articlePublishedAtTv.text = article.id.toString()
-                binding.articleDescriptionTv.text = article.id.toString()
-                binding.articleImageIv.load(article.id) {
+                binding.articleTitleTv.text = article.title
+                binding.articleAuthorTv.text = article.author
+                binding.articlePublishedAtTv.text = article.publishedAt
+                binding.articleDescriptionTv.text = article.description
+                binding.articleImageIv.load(article.urlToImage) {
                     placeholder(ColorDrawable(0xEEEEEE))
                     crossfade(true)
                 }
@@ -74,7 +75,6 @@ class ArticleFragment : Fragment() {
                 binding.errorsTv.text = uiStateView.throwable.message ?: "Unknown Error!"
             }
             is ArticleViewModel.UiStateView.Loading -> Unit
-
         }
     }
 
