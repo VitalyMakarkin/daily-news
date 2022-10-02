@@ -20,8 +20,8 @@ class ArticlesViewModel @Inject constructor(
 
     sealed class UiStateView {
         data class Data(val articles: List<BaseArticleUI>) : UiStateView()
-        object Loading : UiStateView()
         class Error(val throwable: Throwable) : UiStateView()
+        object Loading : UiStateView()
     }
 
     private var _uiStateLiveData: MutableLiveData<UiStateView> =

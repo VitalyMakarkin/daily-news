@@ -42,6 +42,10 @@ class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
             setHasFixedSize(true)
         }
 
+        binding.refreshButton.setOnClickListener {
+            viewModel.refresh()
+        }
+
         viewModel.uiStateLiveData
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { render(it) }
@@ -65,20 +69,18 @@ class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
     }
 
     private fun render(uiStateView: ArticlesViewModel.UiStateView) {
-        binding.progressIndicator.isVisible = uiStateView is ArticlesViewModel.UiStateView.Loading
         binding.articlesRv.isVisible = uiStateView is ArticlesViewModel.UiStateView.Data
         binding.errorsLayout.isVisible = uiStateView is ArticlesViewModel.UiStateView.Error
+        binding.progressIndicator.isVisible = uiStateView is ArticlesViewModel.UiStateView.Loading
 
         when (uiStateView) {
-            is ArticlesViewModel.UiStateView.Loading -> {
-                // TODO: Implement view
-            }
             is ArticlesViewModel.UiStateView.Data -> {
                 articlesAdapter.submitList(uiStateView.articles)
             }
             is ArticlesViewModel.UiStateView.Error -> {
-                // TODO: Implement view
+                binding.errorsTv.text = uiStateView.throwable.message ?: "Unknown Error!"
             }
+            is ArticlesViewModel.UiStateView.Loading -> Unit
         }
     }
 }

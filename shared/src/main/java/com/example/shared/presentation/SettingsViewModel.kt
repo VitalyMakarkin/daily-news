@@ -22,8 +22,8 @@ class SettingsViewModel @Inject constructor(
             val favoriteArticlesCount: Int
         ) : UiStateView()
 
-        object Loading : UiStateView()
         class Error(val throwable: Throwable) : UiStateView()
+        object Loading : UiStateView()
     }
 
     private var _uiStateLiveData: MutableLiveData<UiStateView> =

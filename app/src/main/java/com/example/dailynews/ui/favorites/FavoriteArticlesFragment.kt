@@ -41,6 +41,10 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
             setHasFixedSize(true)
         }
 
+        binding.refreshButton.setOnClickListener {
+            viewModel.refresh()
+        }
+
         viewModel.uiStateLiveData
             .distinctUntilChanged()
             .observe(viewLifecycleOwner) { render(it) }
@@ -64,21 +68,19 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
     }
 
     private fun render(uiStateView: FavoriteArticlesViewModel.UiStateView) {
-        binding.progressIndicator.isVisible =
-            uiStateView is FavoriteArticlesViewModel.UiStateView.Loading
         binding.articlesRv.isVisible = uiStateView is FavoriteArticlesViewModel.UiStateView.Data
         binding.errorsLayout.isVisible = uiStateView is FavoriteArticlesViewModel.UiStateView.Error
+        binding.progressIndicator.isVisible =
+            uiStateView is FavoriteArticlesViewModel.UiStateView.Loading
 
         when (uiStateView) {
-            is FavoriteArticlesViewModel.UiStateView.Loading -> {
-                // TODO: Implement view
-            }
             is FavoriteArticlesViewModel.UiStateView.Data -> {
                 articlesAdapter.submitList(uiStateView.favoriteArticles)
             }
             is FavoriteArticlesViewModel.UiStateView.Error -> {
-                // TODO: Implement view
+                binding.errorsTv.text = uiStateView.throwable.message ?: "Unknown Error!"
             }
+            is FavoriteArticlesViewModel.UiStateView.Loading -> Unit
         }
     }
 }
