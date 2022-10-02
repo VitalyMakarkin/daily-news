@@ -19,7 +19,14 @@ fun ArticlesScreen(
         is ArticlesViewModel.UiStateView.Data -> {
             ArticlesList(
                 articles = uiState.articles,
-                modifier = modifier
+                modifier = modifier,
+                // showArticleDetailsAction = ,
+                addArticleToFavoritesAction = {
+                    viewModel.addArticleToFavorites(it)
+                },
+                removeArticleFromFavoritesAction = {
+                    viewModel.removeArticleFromFavorites(it)
+                }
             )
         }
         is ArticlesViewModel.UiStateView.Error -> {

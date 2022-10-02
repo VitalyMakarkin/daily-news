@@ -12,18 +12,27 @@ import com.example.shared.presentation.model.TextArticleUI
 @Composable
 fun ArticlesList(
     articles: List<BaseArticleUI>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    // showArticleDetailsAction: Unit,
+    addArticleToFavoritesAction: (articleId: Int) -> Unit,
+    removeArticleFromFavoritesAction: (articleId: Int) -> Unit
 ) {
     LazyColumn {
         items(articles) { article ->
             when (article) {
                 is TextArticleUI -> TextArticleItem(
                     article = article,
-                    modifier = modifier
+                    modifier = modifier,
+                    // showArticleDetailsAction = showArticleDetailsAction,
+                    addArticleToFavoritesAction = addArticleToFavoritesAction,
+                    removeArticleFromFavoritesAction = removeArticleFromFavoritesAction
                 )
                 is ImageArticleUI -> ImageArticleItem(
                     article = article,
-                    modifier = modifier
+                    modifier = modifier,
+                    // showArticleDetailsAction = showArticleDetailsAction,
+                    addArticleToFavoritesAction = addArticleToFavoritesAction,
+                    removeArticleFromFavoritesAction = removeArticleFromFavoritesAction
                 )
             }
         }
@@ -33,5 +42,9 @@ fun ArticlesList(
 @Preview(showBackground = true)
 @Composable
 fun ArticleListPreview() {
-    ArticlesList(articles = emptyList())
+    ArticlesList(
+        articles = emptyList(),
+        addArticleToFavoritesAction = {},
+        removeArticleFromFavoritesAction = {}
+    )
 }
