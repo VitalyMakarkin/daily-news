@@ -29,8 +29,8 @@ fun TextArticleItem(
 ) {
     Column(
         modifier = modifier
-            .padding(top = 6.dp, bottom = 6.dp)
             .clickable(onClick = {})
+            .padding(top = 6.dp, bottom = 6.dp)
     ) {
         Text(
             text = article.title,
