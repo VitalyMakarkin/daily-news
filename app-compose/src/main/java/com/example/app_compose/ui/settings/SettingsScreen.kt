@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -60,7 +61,7 @@ fun SettingsScreen(
                 modifier = modifier
             ) {
                 Text(
-                    text = "Total articles:",
+                    text = stringResource(id = com.example.shared.R.string.settings_total_articles_text),
                     modifier = modifier
                 )
                 Text(
@@ -70,7 +71,7 @@ fun SettingsScreen(
                 )
             }
             Text(
-                text = "Long press to clear",
+                text = stringResource(id = com.example.shared.R.string.settings_long_press_to_clear_text),
                 modifier = modifier
             )
         }
@@ -87,7 +88,7 @@ fun SettingsScreen(
                 modifier = modifier
             ) {
                 Text(
-                    text = "Cached (not favorite) articles:",
+                    text = stringResource(id = com.example.shared.R.string.settings_cached_not_favorite_articles_text),
                     modifier = modifier
                 )
                 Text(
@@ -97,7 +98,7 @@ fun SettingsScreen(
                 )
             }
             Text(
-                text = "Long press to clear",
+                text = stringResource(id = com.example.shared.R.string.settings_long_press_to_clear_text),
                 modifier = modifier
             )
         }
@@ -114,7 +115,7 @@ fun SettingsScreen(
                 modifier = modifier
             ) {
                 Text(
-                    text = "Favorite articles:",
+                    text = stringResource(id = com.example.shared.R.string.settings_favorite_articles_text),
                     modifier = modifier
                 )
                 Text(
@@ -124,7 +125,7 @@ fun SettingsScreen(
                 )
             }
             Text(
-                text = "Long press to clear",
+                text = stringResource(id = com.example.shared.R.string.settings_long_press_to_clear_text),
                 modifier = modifier
             )
         }

@@ -18,7 +18,7 @@
             android:id="@+id/total_count_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total articles:"
+            android:text="@string/settings_total_articles_text"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="0"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toEndOf="@id/total_count_title_tv"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long press to clear"
+            android:text="@string/settings_long_press_to_clear_text"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/total_count_title_tv" />
@@ -59,7 +58,7 @@
             android:id="@+id/cached_count_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cached (not favorite) articles:"
+            android:text="@string/settings_cached_not_favorite_articles_text"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="0"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toEndOf="@id/cached_count_title_tv"
             app:layout_constraintTop_toTopOf="parent"
@@ -78,7 +76,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long press to clear"
+            android:text="@string/settings_long_press_to_clear_text"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cached_count_title_tv" />
@@ -100,7 +98,7 @@
             android:id="@+id/favorites_count_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favorite articles:"
+            android:text="@string/settings_favorite_articles_text"
 
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +109,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="0"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintStart_toEndOf="@id/favorites_count_title_tv"
             app:layout_constraintTop_toTopOf="parent"
@@ -120,7 +117,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Long press to clear"
+            android:text="@string/settings_long_press_to_clear_text"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/favorites_count_title_tv" />

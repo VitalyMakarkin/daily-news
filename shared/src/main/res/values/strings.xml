@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="articles_refresh_btn">Refresh</string>
+    <string name="settings_total_articles_text">Total articles:</string>
+    <string name="settings_cached_not_favorite_articles_text">Cached (not favorite) articles:</string>
+    <string name="settings_favorite_articles_text">Favorite articles:</string>
+    <string name="settings_long_press_to_clear_text">Long press to clear</string>
 </resources>
