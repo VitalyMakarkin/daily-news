@@ -9,16 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dailynews.Screens
 import com.example.dailynews.databinding.FragmentArticlesBinding
 import com.example.dailynews.ui.shared.ArticlesAdapter
 import com.example.shared.presentation.ArticlesViewModel
+import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
 
     private val viewModel: ArticlesViewModel by viewModels()
+
+    @Inject
+    lateinit var router: Router
 
     private var _binding: FragmentArticlesBinding? = null
     private val binding get() = _binding!!
@@ -58,7 +63,7 @@ class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
     }
 
     override fun onItemClicked(articleId: Int) {
-        Timber.d("onItemClicked()")
+        router.navigateTo(Screens.toArticle(articleId))
     }
 
     override fun onFavoriteItemMarked(articleId: Int) {

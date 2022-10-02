@@ -34,6 +34,7 @@ fun ArticlesList(
                     addArticleToFavoritesAction = addArticleToFavoritesAction,
                     removeArticleFromFavoritesAction = removeArticleFromFavoritesAction
                 )
+                else -> throw Exception("View type not implemented")
             }
         }
     }
