@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.app_compose.ui.articles.ArticlesScreen
+import com.example.app_compose.ui.favorites.FavoriteArticlesScreen
 import com.example.app_compose.ui.theme.DailynewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,7 +54,8 @@ fun DailyNews(
                     )
                 },
                 selected = false,
-                onClick = { /*TODO*/ })
+                onClick = { navHostController.navigate("articles") }
+            )
             BottomNavigationItem(
                 icon = {
                     Icon(
@@ -62,7 +64,8 @@ fun DailyNews(
                     )
                 },
                 selected = false,
-                onClick = { /*TODO*/ })
+                onClick = { navHostController.navigate("favorite_articles") }
+            )
             BottomNavigationItem(
                 icon = {
                     Icon(
@@ -80,6 +83,9 @@ fun DailyNews(
         ) {
             composable("articles") {
                 ArticlesScreen()
+            }
+            composable("favorite_articles") {
+                FavoriteArticlesScreen()
             }
         }
     }
