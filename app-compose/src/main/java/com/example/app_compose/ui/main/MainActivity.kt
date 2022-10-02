@@ -3,6 +3,7 @@ package com.example.app_compose.ui.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -20,6 +21,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.app_compose.ui.articles.ArticlesScreen
 import com.example.app_compose.ui.favorites.FavoriteArticlesScreen
+import com.example.app_compose.ui.settings.SettingsScreen
 import com.example.app_compose.ui.theme.DailynewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DailyNews(
     navHostController: NavHostController = rememberNavController()
@@ -74,7 +77,7 @@ fun DailyNews(
                     )
                 },
                 selected = false,
-                onClick = { /*TODO*/ })
+                onClick = { navHostController.navigate("settings") })
         }
     }) {
         NavHost(
@@ -86,6 +89,9 @@ fun DailyNews(
             }
             composable("favorite_articles") {
                 FavoriteArticlesScreen()
+            }
+            composable("settings") {
+                SettingsScreen()
             }
         }
     }
