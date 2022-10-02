@@ -132,9 +132,8 @@ fun SettingsScreen(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Preview(showBackground = true)
 @Composable
 fun SettingsScreenPreview() {
-    SettingsScreen()
+    // TODO: Implement screen preview
 }
