@@ -25,7 +25,8 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
     private val articlesAdapter: ArticlesAdapter by lazy { ArticlesAdapter(this) }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoriteArticlesBinding.inflate(inflater, container, false)
