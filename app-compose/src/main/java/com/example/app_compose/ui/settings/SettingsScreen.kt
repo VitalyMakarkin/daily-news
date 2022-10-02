@@ -9,19 +9,50 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.shared.presentation.SettingsViewModel
 
 @ExperimentalFoundationApi
 @Composable
 fun SettingsScreen(
+    viewModel: SettingsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
+    val state = viewModel.uiStateLiveData.observeAsState()
+
+    var cachedArticlesCount = "-"
+    var favoriteArticlesCount = "-"
+    var articlesCount = "-"
+
+    when (val uiState = state.value) {
+        is SettingsViewModel.UiStateView.Data -> {
+            cachedArticlesCount = uiState.cachedArticlesCount.toString()
+            favoriteArticlesCount = uiState.favoriteArticlesCount.toString()
+            articlesCount = uiState.articlesCount.toString()
+        }
+        is SettingsViewModel.UiStateView.Error -> {
+            cachedArticlesCount = "Error"
+            favoriteArticlesCount = "Error"
+            articlesCount = "Error"
+        }
+        is SettingsViewModel.UiStateView.Loading -> {
+            cachedArticlesCount = "-"
+            favoriteArticlesCount = "-"
+            articlesCount = "-"
+        }
+        else -> {} // throw Exception("Not implemented state")
+    }
+
     Column {
         Column(
             modifier = modifier
-                .combinedClickable(onClick = {}, onLongClick = {})
+                .combinedClickable(
+                    onClick = {},
+                    onLongClick = { viewModel.removeAllArticles() })
                 .padding(all = 8.dp)
                 .fillMaxWidth()
         ) {
@@ -33,7 +64,7 @@ fun SettingsScreen(
                     modifier = modifier
                 )
                 Text(
-                    text = "0",
+                    text = articlesCount,
                     modifier = modifier
                         .padding(start = 4.dp)
                 )
@@ -46,7 +77,9 @@ fun SettingsScreen(
         Divider()
         Column(
             modifier = modifier
-                .combinedClickable(onClick = {}, onLongClick = {})
+                .combinedClickable(
+                    onClick = {},
+                    onLongClick = { viewModel.removeCachedNotFavoriteArticles() })
                 .padding(all = 8.dp)
                 .fillMaxWidth()
         ) {
@@ -58,7 +91,7 @@ fun SettingsScreen(
                     modifier = modifier
                 )
                 Text(
-                    text = "0",
+                    text = cachedArticlesCount,
                     modifier = modifier
                         .padding(start = 4.dp)
                 )
@@ -71,7 +104,9 @@ fun SettingsScreen(
         Divider()
         Column(
             modifier = modifier
-                .combinedClickable(onClick = {}, onLongClick = {})
+                .combinedClickable(
+                    onClick = {},
+                    onLongClick = { viewModel.removeFavoriteArticles() })
                 .padding(all = 8.dp)
                 .fillMaxWidth()
         ) {
@@ -83,7 +118,7 @@ fun SettingsScreen(
                     modifier = modifier
                 )
                 Text(
-                    text = "0",
+                    text = favoriteArticlesCount,
                     modifier = modifier
                         .padding(start = 4.dp)
                 )
