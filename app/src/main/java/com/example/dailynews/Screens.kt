@@ -8,7 +8,9 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
     fun toArticles() = FragmentScreen { ArticlesFragment() }
-    fun toArticle(articleId: Int) = FragmentScreen { ArticleFragment.create(articleId) }
+    fun toArticle(articleId: Int) = FragmentScreen("Article($articleId)") {
+        ArticleFragment.create(articleId)
+    }
     fun toFavoriteArticles() = FragmentScreen { FavoriteArticlesFragment() }
     fun toSettings() = FragmentScreen { SettingsFragment() }
 }
