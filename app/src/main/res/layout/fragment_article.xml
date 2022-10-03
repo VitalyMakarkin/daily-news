@@ -97,22 +97,11 @@
             app:layout_constraintTop_toBottomOf="@+id/article_published_at_tv"
             tools:text="Detailed description of article" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@id/back_nav_iv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <ImageView
             android:id="@+id/back_nav_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="16dp"
             android:src="@drawable/ic_back_nav"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -121,10 +110,7 @@
             android:id="@+id/favorite_marked_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="16dp"
             android:src="@drawable/ic_favorite_marked"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -134,10 +120,7 @@
             android:id="@+id/favorite_unmarked_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="16dp"
             android:src="@drawable/ic_favorite_unmarked"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/source_link_iv"
@@ -147,10 +130,7 @@
             android:id="@+id/source_link_iv"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="16dp"
             android:src="@drawable/ic_source_link"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -1,6 +1,7 @@
 package com.example.dailynews.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dailynews.R
 import com.example.dailynews.Screens.toArticles
@@ -27,6 +28,12 @@ class MainActivity : AppCompatActivity() {
         override fun applyCommands(commands: Array<out Command>) {
             super.applyCommands(commands)
             supportFragmentManager.executePendingTransactions()
+            supportFragmentManager.addOnBackStackChangedListener {
+                binding.bottomNav.visibility = when (supportFragmentManager.backStackEntryCount) {
+                    0 -> View.VISIBLE
+                    else -> View.GONE
+                }
+            }
         }
     }
 
