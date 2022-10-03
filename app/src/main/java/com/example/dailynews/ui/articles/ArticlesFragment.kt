@@ -62,6 +62,13 @@ class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.uiStateLiveData.value is ArticlesViewModel.UiStateView.Data) {
+            viewModel.refresh()
+        }
+    }
+
     override fun onItemClicked(articleId: Int) {
         router.navigateTo(Screens.toArticle(articleId))
     }

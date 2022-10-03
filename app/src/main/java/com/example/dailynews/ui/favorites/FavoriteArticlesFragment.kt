@@ -63,6 +63,13 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.uiStateLiveData.value is FavoriteArticlesViewModel.UiStateView.Data) {
+            viewModel.refresh()
+        }
+    }
+
     override fun onItemClicked(articleId: Int) {
         router.navigateTo(Screens.toArticle(articleId))
     }
