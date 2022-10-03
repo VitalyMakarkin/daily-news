@@ -59,7 +59,7 @@
         android:layout_marginBottom="6dp"
         android:src="@drawable/ic_favorite_marked"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/favorite_unmarked_iv"
+        app:layout_constraintEnd_toStartOf="@id/favorite_unmarked_iv"
         app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
     <ImageView

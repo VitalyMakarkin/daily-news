@@ -61,13 +61,40 @@ class ArticleFragment : Fragment() {
         when (uiStateView) {
             is ArticleViewModel.UiStateView.Data -> {
                 val article = uiStateView.article
+
                 binding.articleTitleTv.text = article.title
+
                 binding.articleAuthorTv.text = article.author
+                binding.articleAuthorTv.visibility = when {
+                    article.author.isEmpty() && article.author.isBlank() -> View.GONE
+                    else -> View.VISIBLE
+                }
+
                 binding.articlePublishedAtTv.text = article.publishedAt
+
                 binding.articleDescriptionTv.text = article.description
+                binding.articleDescriptionTv.visibility = when {
+                    article.description.isEmpty() && article.description.isBlank() -> View.GONE
+                    else -> View.VISIBLE
+                }
+
                 binding.articleImageIv.load(article.urlToImage) {
                     placeholder(ColorDrawable(0xEEEEEE))
                     crossfade(true)
+                }
+                binding.articleImageIv.visibility = when {
+                    article.urlToImage.isEmpty() && article.urlToImage.isBlank() -> View.GONE
+                    else -> View.VISIBLE
+                }
+
+                binding.favoriteMarkedIv.visibility = when (article.isFavorite) {
+                    true -> View.VISIBLE
+                    else -> View.GONE
+                }
+
+                binding.favoriteUnmarkedIv.visibility = when (article.isFavorite) {
+                    true -> View.GONE
+                    else -> View.VISIBLE
                 }
             }
             is ArticleViewModel.UiStateView.Error -> {
