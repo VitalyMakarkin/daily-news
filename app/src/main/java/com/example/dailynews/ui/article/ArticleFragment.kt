@@ -12,7 +12,9 @@ import coil.load
 import com.example.dailynews.databinding.FragmentArticleBinding
 import com.example.shared.presentation.ArticleViewModel
 import com.example.shared.presentation.ArticleViewModel.Companion.ARG_ARTICLE_ID
+import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {
@@ -26,6 +28,9 @@ class ArticleFragment : Fragment() {
             }
         }
     }
+
+    @Inject
+    lateinit var router: Router
 
     private val viewModel: ArticleViewModel by viewModels()
 
@@ -87,14 +92,24 @@ class ArticleFragment : Fragment() {
                     else -> View.VISIBLE
                 }
 
+                binding.favoriteMarkedIv.setOnClickListener {
+                    viewModel.removeArticleFromFavorites(article.id)
+                }
                 binding.favoriteMarkedIv.visibility = when (article.isFavorite) {
                     true -> View.VISIBLE
                     else -> View.GONE
                 }
 
+                binding.favoriteUnmarkedIv.setOnClickListener {
+                    viewModel.addArticleToFavorites(article.id)
+                }
                 binding.favoriteUnmarkedIv.visibility = when (article.isFavorite) {
                     true -> View.GONE
                     else -> View.VISIBLE
+                }
+
+                binding.backNavIv.setOnClickListener {
+                    router.exit()
                 }
             }
             is ArticleViewModel.UiStateView.Error -> {

@@ -61,4 +61,39 @@ class ArticleViewModel @Inject constructor(
             }
         }
     }
+
+    fun addArticleToFavorites(id: Int) {
+        viewModelScope.launch {
+            try {
+                articleInteractor.setArticleFavoriteState(id, true)
+            } catch (error: Throwable) {
+                Timber.w(error)
+            }
+        }.invokeOnCompletion { updateArticleFromList(id) }
+    }
+
+    fun removeArticleFromFavorites(id: Int) {
+        viewModelScope.launch {
+            try {
+                articleInteractor.setArticleFavoriteState(id, false)
+            } catch (error: Throwable) {
+                Timber.w(error)
+            }
+        }.invokeOnCompletion { updateArticleFromList(id) }
+    }
+
+    private fun updateArticleFromList(id: Int) {
+        viewModelScope.launch {
+            try {
+                if (uiStateLiveData.value is UiStateView.Data) {
+                    articleInteractor.getArticle(id).onSuccess { updatedArticle ->
+                        val updatedArticleUI = updatedArticle.mapToDetailsUI()
+                        _uiStateLiveData.value = UiStateView.Data(updatedArticleUI)
+                    }
+                }
+            } catch (error: Throwable) {
+                Timber.w(error)
+            }
+        }
+    }
 }
