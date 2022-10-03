@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dailynews.R
-import com.example.dailynews.Screens.toArticles
-import com.example.dailynews.Screens.toFavoriteArticles
-import com.example.dailynews.Screens.toSettings
+import com.example.dailynews.Screens
 import com.example.dailynews.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Replace
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
+
+    @Inject
+    lateinit var router: Router
 
     lateinit var binding: ActivityMainBinding
 
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         initViews()
 
         if (savedInstanceState == null) {
-            navigator.applyCommands(arrayOf<Command>(Replace(toArticles())))
+            navigator.applyCommands(arrayOf(Replace(Screens.toArticles())))
         }
     }
 
@@ -53,16 +55,15 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.articles_item -> {
-                    navigator.applyCommands(arrayOf<Command>(Replace(toArticles())))
+                    router.replaceScreen(Screens.toArticles())
                 }
                 R.id.favorite_articles_item -> {
-                    navigator.applyCommands(arrayOf<Command>(Replace(toFavoriteArticles())))
+                    router.replaceScreen(Screens.toFavoriteArticles())
                 }
                 R.id.settings_item -> {
-                    navigator.applyCommands(arrayOf<Command>(Replace(toSettings())))
+                    router.replaceScreen(Screens.toSettings())
                 }
             }
-
             return@setOnItemSelectedListener true
         }
     }
