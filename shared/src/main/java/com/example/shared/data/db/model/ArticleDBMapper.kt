@@ -9,6 +9,7 @@ fun ArticleDB.mapToDomain(): Article = Article(
     description = this.description,
     publishedAt = this.publishedAt,
     urlToImage = this.urlToImage,
+    url = this.url,
     cachedAt = this.cachedAt,
     favoritesAt = this.favoritesAt,
     isFavorite = this.favoritesAt.isNotEmpty()

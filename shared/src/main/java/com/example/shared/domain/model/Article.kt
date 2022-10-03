@@ -7,6 +7,7 @@ data class Article(
     val description: String,
     val publishedAt: String,
     val urlToImage: String,
+    val url: String,
     val cachedAt: String,
     val favoritesAt: String,
     val isFavorite: Boolean

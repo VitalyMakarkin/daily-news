@@ -7,5 +7,6 @@ data class ArticleDetailsUI(
     val publishedAt: String,
     val description: String,
     val urlToImage: String,
+    val url: String,
     val isFavorite: Boolean
 ) : BaseArticleUI(id)

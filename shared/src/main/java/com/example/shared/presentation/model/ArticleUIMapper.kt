@@ -40,6 +40,7 @@ fun Article.mapToDetailsUI(): ArticleDetailsUI {
         publishedAt = datetimeMapper(this.publishedAt),
         description = this.description,
         urlToImage = this.urlToImage,
+        url = this.url,
         isFavorite = this.isFavorite
     )
 }

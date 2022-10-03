@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
+import com.example.dailynews.Screens
 import com.example.dailynews.databinding.FragmentArticleBinding
 import com.example.shared.presentation.ArticleViewModel
 import com.example.shared.presentation.ArticleViewModel.Companion.ARG_ARTICLE_ID
@@ -110,6 +111,14 @@ class ArticleFragment : Fragment() {
 
                 binding.backNavIv.setOnClickListener {
                     router.exit()
+                }
+
+                binding.sourceLinkIv.setOnClickListener {
+                    router.navigateTo(Screens.toArticleSource(article.url))
+                }
+                binding.sourceLinkIv.visibility = when {
+                    article.url.isEmpty() && article.url.isBlank() -> View.GONE
+                    else -> View.VISIBLE
                 }
             }
             is ArticleViewModel.UiStateView.Error -> {
