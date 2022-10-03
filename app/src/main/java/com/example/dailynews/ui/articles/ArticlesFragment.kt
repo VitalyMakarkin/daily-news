@@ -64,7 +64,7 @@ class ArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.uiStateLiveData.value is ArticlesViewModel.UiStateView.Data) {
+        if (viewModel.uiStateLiveData.value !is ArticlesViewModel.UiStateView.Loading) {
             viewModel.refresh()
         }
     }

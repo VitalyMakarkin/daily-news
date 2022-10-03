@@ -65,7 +65,7 @@ class FavoriteArticlesFragment : Fragment(), ArticlesAdapter.ItemHandler {
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.uiStateLiveData.value is FavoriteArticlesViewModel.UiStateView.Data) {
+        if (viewModel.uiStateLiveData.value !is FavoriteArticlesViewModel.UiStateView.Loading) {
             viewModel.refresh()
         }
     }
